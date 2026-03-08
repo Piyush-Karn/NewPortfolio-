@@ -15,29 +15,31 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <>
-      <AnimatePresence>
+    <div className="noise-overlay">
+      <AnimatePresence mode="wait">
         {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
-      {!loading && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Navbar />
-          <HeroSection />
-          <AboutSection />
-          <SkillsSection />
-          <ExperienceSection />
-          <ProjectsSection />
-          <AchievementsSection />
-          <TechStackSection />
-          <ContactSection />
-        </motion.div>
-      )}
-    </>
+      <AnimatePresence>
+        {!loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Navbar />
+            <HeroSection />
+            <AboutSection />
+            <SkillsSection />
+            <ExperienceSection />
+            <ProjectsSection />
+            <AchievementsSection />
+            <TechStackSection />
+            <ContactSection />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 
