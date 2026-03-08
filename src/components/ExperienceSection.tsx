@@ -18,8 +18,6 @@ const ExperienceSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const bgX = useTransform(scrollYProgress, [0, 1], ["5%", "-15%"]);
 
   return (
     <section id="experience" className="relative py-32 overflow-hidden" ref={containerRef}>
