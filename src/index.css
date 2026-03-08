@@ -158,9 +158,15 @@
   background: hsl(var(--primary) / 0.5);
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+/* Lenis handles smooth scroll — remove native smooth to avoid conflict */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 /* Selection */
