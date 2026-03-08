@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
 
-import ExperienceSection from "@/components/ExperienceSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import AchievementsSection from "@/components/AchievementsSection";
-import TechStackSection from "@/components/TechStackSection";
-import ContactSection from "@/components/ContactSection";
-import SectionWrapper from "@/components/SectionWrapper";
+// Lazy load below-fold sections
+const AboutSection = lazy(() => import("@/components/AboutSection"));
+const TechStackSection = lazy(() => import("@/components/TechStackSection"));
+const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
+const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const AchievementsSection = lazy(() => import("@/components/AchievementsSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -31,12 +31,14 @@ const Index = () => {
             <Navbar />
             <HeroSection />
 
-            <AboutSection />
-            <TechStackSection />
-            <ExperienceSection />
-            <ProjectsSection />
-            <AchievementsSection />
-            <ContactSection />
+            <Suspense fallback={null}>
+              <AboutSection />
+              <TechStackSection />
+              <ExperienceSection />
+              <ProjectsSection />
+              <AchievementsSection />
+              <ContactSection />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>

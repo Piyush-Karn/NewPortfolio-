@@ -38,17 +38,13 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
       >
         {/* Ambient orbs */}
         <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            className="absolute w-[600px] h-[600px] rounded-full blur-[150px] opacity-20"
+          <div
+            className="absolute w-[600px] h-[600px] rounded-full blur-[80px] opacity-20"
             style={{ background: "hsl(var(--primary))", top: "20%", left: "-10%" }}
-            animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
-          <motion.div
-            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] opacity-15"
+          <div
+            className="absolute w-[400px] h-[400px] rounded-full blur-[60px] opacity-15"
             style={{ background: "hsl(var(--accent))", bottom: "10%", right: "-5%" }}
-            animate={{ x: [0, -80, 0], y: [0, 60, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
 

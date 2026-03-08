@@ -55,7 +55,7 @@ const TechStackSection = () => {
 
   return (
     // Tall container creates scroll space: 100vh sticky + 300vh scroll room
-    <section id="skills" ref={containerRef} className="relative" style={{ height: `${100 + techCategories.length * 80}vh` }}>
+    <section id="skills" ref={containerRef} className="relative" style={{ height: `${100 + techCategories.length * 60}vh` }}>
       <div ref={stickyRef} className="sticky top-0 h-screen overflow-hidden flex items-center">
         {/* Large background parallax text */}
         <motion.div

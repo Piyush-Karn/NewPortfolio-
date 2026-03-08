@@ -60,7 +60,7 @@ const AchievementsSection = () => {
               className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0"
             >
               <Trophy className="w-10 h-10 text-primary" />
-            </motion.div>
+            </div>
 
             <div>
               <div className="flex items-center gap-3 mb-3">

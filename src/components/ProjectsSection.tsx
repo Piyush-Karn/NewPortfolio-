@@ -255,17 +255,14 @@ const ProjectsSection = () => {
               <motion.div className="h-full bg-gradient-to-r from-primary to-accent rounded-full" style={{ scaleX: scrollYProgress, transformOrigin: "left" }} />
             </div>
             <div className="flex justify-between mt-2">
-              {projects.map((p, i) => (
-                <motion.span
+              {projects.map((p) => (
+                <span
                   key={p.num}
                   className="text-xs text-muted-foreground"
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    opacity: useTransform(scrollYProgress, [i / projects.length, (i + 0.5) / projects.length], [0.3, 1]),
-                  }}
+                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
                 >
                   {p.num}
-                </motion.span>
+                </span>
               ))}
             </div>
           </div>

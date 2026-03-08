@@ -282,7 +282,7 @@ const HeroSection = () => {
                 </textPath>
               </text>
             </svg>
-          </motion.div>
+          </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <ExternalLink className="w-4 h-4 text-muted-foreground/30" />
           </div>
