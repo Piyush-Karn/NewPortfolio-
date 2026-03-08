@@ -22,17 +22,14 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="relative py-32 overflow-hidden" ref={containerRef}>
-      {/* Large background text */}
-      <motion.div
-        className="absolute top-20 whitespace-nowrap pointer-events-none select-none"
-        style={{ x }}
-      >
+      {/* Large background text — hidden on mobile */}
+      <div className="hidden md:block absolute top-20 whitespace-nowrap pointer-events-none select-none">
         <span className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-30"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           ABOUT ME
         </span>
-      </motion.div>
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12" ref={ref}>
         {/* Section label */}
