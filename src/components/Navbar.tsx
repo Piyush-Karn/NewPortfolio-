@@ -73,19 +73,34 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA */}
-          <motion.a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            whileHover={{ scale: 1.05 }}
-            className="hidden md:inline-flex text-xs px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            Hire Me
-          </motion.a>
+          {/* Theme toggle + CTA */}
+          <div className="hidden md:flex items-center gap-2">
+            {mounted && (
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="w-9 h-9 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </motion.button>
+            )}
+            <motion.a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              whileHover={{ scale: 1.05 }}
+              className="text-xs px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all"
+              style={{ fontFamily: "'JetBrains Mono', monospace" }}
+            >
+              Hire Me
+            </motion.a>
+          </div>
 
           {/* Mobile menu button */}
           <motion.button
