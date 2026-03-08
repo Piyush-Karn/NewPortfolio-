@@ -18,8 +18,6 @@ const ContactSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [copied, setCopied] = useState(false);
 
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const bgX = useTransform(scrollYProgress, [0, 1], ["-5%", "10%"]);
 
   const copyEmail = () => {
     navigator.clipboard.writeText("piyushkarn96@gmail.com");
