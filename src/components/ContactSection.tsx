@@ -47,10 +47,6 @@ const ContactSection = () => {
         className="absolute top-20 right-10 w-[400px] h-[400px] rounded-full blur-[80px] opacity-10 pointer-events-none"
         style={{ background: "hsl(var(--primary))" }}
       />
-      <div
-        className="absolute bottom-20 left-10 w-[300px] h-[300px] rounded-full blur-[60px] opacity-8 pointer-events-none"
-        style={{ background: "hsl(var(--accent))" }}
-      />
 
       <div className="max-w-7xl mx-auto relative z-10" ref={ref}>
         {/* Header */}
