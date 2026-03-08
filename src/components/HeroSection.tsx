@@ -1,8 +1,20 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { Download, ArrowDown } from "lucide-react";
+import { Download, ArrowDown, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
 
 const roles = ["AI/ML Engineer", "Software Developer", "Deep Learning Enthusiast", "Computer Vision Specialist"];
+
+const stats = [
+  { label: "Projects", value: "10+" },
+  { label: "Experience", value: "2+ Yrs" },
+  { label: "Technologies", value: "15+" },
+];
+
+const socialLinks = [
+  { icon: Github, href: "https://github.com/", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:contact@example.com", label: "Email" },
+];
 
 const HeroSection = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -10,6 +22,7 @@ const HeroSection = () => {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
   const nameY = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const bgTextX = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,6 +53,16 @@ const HeroSection = () => {
         backgroundSize: "80px 80px",
       }} />
 
+      {/* Large background text */}
+      <motion.div
+        className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none select-none"
+        style={{ x: bgTextX, opacity: 0.03, fontFamily: "'Space Grotesk', sans-serif" }}
+      >
+        <span className="text-[20vw] font-bold tracking-[-0.05em] text-foreground">
+          ENGINEER • CREATOR • BUILDER
+        </span>
+      </motion.div>
+
       {/* Floating orbs */}
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full blur-[200px]"
@@ -53,6 +76,12 @@ const HeroSection = () => {
         animate={{ scale: [1, 1.3, 1], x: [0, 30, 0] }}
         transition={{ duration: 10, repeat: Infinity }}
       />
+      <motion.div
+        className="absolute w-[200px] h-[200px] rounded-full blur-[120px]"
+        style={{ background: "hsl(var(--neon) / 0.08)", top: "40%", left: "50%" }}
+        animate={{ scale: [1, 1.4, 1], y: [0, -40, 0] }}
+        transition={{ duration: 12, repeat: Infinity }}
+      />
 
       {/* Decorative lines */}
       <motion.div
@@ -64,7 +93,35 @@ const HeroSection = () => {
         style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--accent) / 0.08), transparent)", opacity }}
       />
 
-      <motion.div className="relative z-10 w-full px-6 md:px-12 lg:px-20" style={{ y: nameY, opacity }}>
+      {/* Side social links - desktop */}
+      <motion.div
+        className="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 flex-col items-center gap-5 z-20"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.6, duration: 0.8 }}
+        style={{ opacity }}
+      >
+        <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-primary/30" />
+        {socialLinks.map((social, i) => (
+          <motion.a
+            key={social.label}
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.2, y: -2 }}
+            whileTap={{ scale: 0.9 }}
+            className="w-10 h-10 rounded-full border border-border hover:border-primary/50 flex items-center justify-center text-muted-foreground hover:text-primary transition-all"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.8 + i * 0.1 }}
+          >
+            <social.icon className="w-4 h-4" />
+          </motion.a>
+        ))}
+        <div className="w-[1px] h-16 bg-gradient-to-b from-primary/30 to-transparent" />
+      </motion.div>
+
+      <motion.div className="relative z-10 w-full px-6 md:px-12 lg:px-24" style={{ y: nameY, opacity }}>
         {/* Greeting */}
         <motion.div
           className="mb-6"
@@ -82,7 +139,7 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        {/* Name - massive typography */}
+        {/* Name */}
         <div className="overflow-hidden mb-2">
           <div className="flex flex-wrap" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             {firstName.split("").map((letter, i) => (
@@ -100,7 +157,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className="overflow-hidden mb-8">
+        <div className="overflow-hidden mb-6">
           <div className="flex flex-wrap items-end gap-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             {lastName.split("").map((letter, i) => (
               <motion.span
@@ -144,9 +201,23 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Bottom row - CTAs + decorative */}
+        {/* Brief tagline */}
+        <motion.p
+          className="max-w-lg text-muted-foreground text-sm md:text-base leading-relaxed mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.3, duration: 0.8 }}
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
+          Crafting intelligent systems at the intersection of{" "}
+          <span className="text-primary font-medium">machine learning</span>,{" "}
+          <span className="text-accent font-medium">computer vision</span>, and{" "}
+          <span className="font-medium" style={{ color: "hsl(var(--neon))" }}>software engineering</span>.
+        </motion.p>
+
+        {/* CTAs + Stats row */}
         <motion.div
-          className="flex flex-wrap items-center gap-6 mt-8"
+          className="flex flex-wrap items-center gap-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.8 }}
@@ -178,13 +249,41 @@ const HeroSection = () => {
             <span>Resume</span>
           </motion.a>
 
-          {/* Decorative rotating text */}
+          {/* Stats divider + stats */}
+          <div className="hidden md:flex items-center gap-8 ml-6 pl-8 border-l border-border/50">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.6 + i * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-xl md:text-2xl font-bold text-gradient-static" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  {stat.value}
+                </div>
+                <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-1"
+                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                >
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Decorative rotating text */}
+        <motion.div
+          className="hidden lg:block absolute right-0 bottom-0"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 2, duration: 0.6 }}
+        >
           <motion.div
-            className="hidden lg:block ml-auto"
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >
-            <svg width="100" height="100" viewBox="0 0 100 100" className="text-muted-foreground/30">
+            <svg width="120" height="120" viewBox="0 0 100 100" className="text-muted-foreground/20">
               <path id="textCircle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
               <text fontSize="10" fill="currentColor" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                 <textPath href="#textCircle">
@@ -193,6 +292,9 @@ const HeroSection = () => {
               </text>
             </svg>
           </motion.div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <ExternalLink className="w-4 h-4 text-muted-foreground/30" />
+          </div>
         </motion.div>
       </motion.div>
 
