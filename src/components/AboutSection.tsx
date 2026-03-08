@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Brain, Trophy, Target, Sparkles, Code2, Cpu, GraduationCap, MapPin } from "lucide-react";
 

@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   Mail, MapPin, Linkedin, Globe, ArrowUpRight, Send, Github,

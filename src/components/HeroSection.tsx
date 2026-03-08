@@ -266,27 +266,27 @@ const HeroSection = () => {
           </div>
         </motion.div>
 
-        {/* Decorative rotating text */}
-        <motion.div
-          className="hidden lg:block absolute right-0 bottom-0"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2, duration: 0.6 }}
-        >
-          <div className="animate-spin" style={{ animationDuration: "20s" }}>
-            <svg width="120" height="120" viewBox="0 0 100 100" className="text-muted-foreground/20">
-              <path id="textCircle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
-              <text fontSize="10" fill="currentColor" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                <textPath href="#textCircle">
-                  SCROLL DOWN • EXPLORE MORE • SCROLL DOWN •
-                </textPath>
-              </text>
-            </svg>
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <ExternalLink className="w-4 h-4 text-muted-foreground/30" />
-          </div>
-        </motion.div>
+      {/* Decorative rotating text — CSS animation instead of JS */}
+      <motion.div
+        className="hidden lg:block absolute right-0 bottom-0"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 2, duration: 0.6 }}
+      >
+        <div style={{ animation: "spin 20s linear infinite" }}>
+          <svg width="120" height="120" viewBox="0 0 100 100" className="text-muted-foreground/20">
+            <path id="textCircle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
+            <text fontSize="10" fill="currentColor" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <textPath href="#textCircle">
+                SCROLL DOWN • EXPLORE MORE • SCROLL DOWN •
+              </textPath>
+            </text>
+          </svg>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <ExternalLink className="w-4 h-4 text-muted-foreground/30" />
+        </div>
+      </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}
