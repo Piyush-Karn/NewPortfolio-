@@ -32,11 +32,10 @@ const Index = () => {
             <HeroSection />
 
             <AboutSection />
-            
+            <TechStackSection />
             <ExperienceSection />
             <ProjectsSection />
             <AchievementsSection />
-            <TechStackSection />
             <ContactSection />
           </motion.div>
         )}
