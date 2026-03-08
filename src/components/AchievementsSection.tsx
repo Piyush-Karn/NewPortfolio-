@@ -45,13 +45,13 @@ const AchievementsSection = () => {
           {/* Gradient background */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-transparent" />
           
-          {/* Floating decorative elements — static to reduce GPU load */}
+          {/* Floating decorative elements — hidden on mobile */}
           <div
-            className="absolute -top-6 -right-6 w-32 h-32 rounded-full blur-[40px]"
+            className="hidden md:block absolute -top-6 -right-6 w-32 h-32 rounded-full blur-[30px]"
             style={{ background: "hsl(var(--primary) / 0.2)", opacity: 0.5 }}
           />
           <div
-            className="absolute bottom-0 left-0 w-24 h-24 rounded-full blur-[30px]"
+            className="hidden md:block absolute bottom-0 left-0 w-24 h-24 rounded-full blur-[20px]"
             style={{ background: "hsl(var(--accent) / 0.15)" }}
           />
 

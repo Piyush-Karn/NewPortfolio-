@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
   Briefcase,
@@ -18,17 +18,15 @@ const ExperienceSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const bgX = useTransform(scrollYProgress, [0, 1], ["5%", "-15%"]);
 
   return (
     <section id="experience" className="relative py-32 overflow-hidden" ref={containerRef}>
-      {/* Background parallax text */}
-      <motion.div className="absolute top-16 whitespace-nowrap pointer-events-none select-none" style={{ x: bgX }}>
+      {/* Background text — hidden on mobile */}
+      <div className="hidden md:block absolute top-16 whitespace-nowrap pointer-events-none select-none">
         <span className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-30" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           JOURNEY
         </span>
-      </motion.div>
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12" ref={ref}>
         {/* Header */}

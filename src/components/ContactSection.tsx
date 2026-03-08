@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   Mail, MapPin, Linkedin, Globe, ArrowUpRight, Send, Github,
@@ -18,8 +18,6 @@ const ContactSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [copied, setCopied] = useState(false);
 
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const bgX = useTransform(scrollYProgress, [0, 1], ["-5%", "10%"]);
 
   const copyEmail = () => {
     navigator.clipboard.writeText("piyushkarn96@gmail.com");
@@ -29,22 +27,19 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="relative py-32 px-6 md:px-12 overflow-hidden" ref={containerRef}>
-      {/* Background parallax text */}
-      <motion.div
-        className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none select-none"
-        style={{ x: bgX }}
-      >
+      {/* Background parallax text — hidden on mobile */}
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none select-none">
         <span
           className="text-[18vw] font-bold tracking-[-0.04em] text-stroke opacity-15"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           LET'S CONNECT
         </span>
-      </motion.div>
+      </div>
 
-      {/* Ambient orbs */}
+      {/* Ambient orbs — hidden on mobile */}
       <div
-        className="absolute top-20 right-10 w-[400px] h-[400px] rounded-full blur-[80px] opacity-10 pointer-events-none"
+        className="hidden md:block absolute top-20 right-10 w-[400px] h-[400px] rounded-full blur-[60px] opacity-10 pointer-events-none"
         style={{ background: "hsl(var(--primary))" }}
       />
 

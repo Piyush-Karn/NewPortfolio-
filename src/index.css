@@ -105,8 +105,22 @@
 
   .glass-card {
     background: hsl(var(--card) / 0.6);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid hsl(var(--border) / 0.5);
+  }
+}
+
+/* Mobile performance: reduce expensive effects */
+@media (max-width: 768px) {
+  .glass-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  /* Use content-visibility for offscreen sections */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
   }
 
   .line-clamp-3 {
@@ -117,9 +131,23 @@
   }
 }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+/* Pause non-essential animations when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @keyframes marquee {

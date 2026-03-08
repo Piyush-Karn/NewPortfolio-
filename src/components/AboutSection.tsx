@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Brain, Trophy, Target, Sparkles, Code2, Cpu, GraduationCap, MapPin } from "lucide-react";
 
@@ -19,23 +19,17 @@ const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const x = useTransform(scrollYProgress, [0, 1], ["-20%", "10%"]);
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
     <section id="about" className="relative py-32 overflow-hidden" ref={containerRef}>
-      {/* Large background text */}
-      <motion.div
-        className="absolute top-20 whitespace-nowrap pointer-events-none select-none"
-        style={{ x }}
-      >
+      {/* Large background text — hidden on mobile */}
+      <div className="hidden md:block absolute top-20 whitespace-nowrap pointer-events-none select-none">
         <span className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-30"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           ABOUT ME
         </span>
-      </motion.div>
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12" ref={ref}>
         {/* Section label */}
@@ -170,7 +164,6 @@ const AboutSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1, duration: 0.7 }}
-              style={{ y: parallaxY }}
               className="relative p-6 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 overflow-hidden"
             >
               <div className="absolute -top-2 -left-1 text-6xl font-bold text-primary/10 leading-none" style={{ fontFamily: "Georgia, serif" }}>"</div>
