@@ -32,7 +32,7 @@ const Index = () => {
             <HeroSection />
 
             <AboutSection />
-            <SkillsSection />
+            
             <ExperienceSection />
             <ProjectsSection />
             <AchievementsSection />
