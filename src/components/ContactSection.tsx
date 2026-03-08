@@ -127,7 +127,7 @@ const ContactSection = () => {
               </motion.button>
 
               <motion.a
-                href="mailto:piyushkarn96@gmail.com"
+                href="mailto:piyushkumar97430@gmail.com"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="group/btn relative flex items-center gap-2 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm overflow-hidden"
