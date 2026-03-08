@@ -22,7 +22,7 @@ const HeroSection = () => {
     hidden: { y: 100, opacity: 0, rotateX: -90 },
     visible: (i: number) => ({
       y: 0, opacity: 1, rotateX: 0,
-      transition: { delay: 0.5 + i * 0.05, duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { delay: 0.5 + i * 0.05, duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
     }),
   };
 
