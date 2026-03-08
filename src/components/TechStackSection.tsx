@@ -1,11 +1,10 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const techs = [
-  "Python", "TensorFlow", "PyTorch", "YOLOv8", "OpenCV",
-  "Scikit-learn", "Flask", "Streamlit", "NumPy", "Pandas",
-  "TensorRT", "NLP", "Git", "Docker", "Linux",
-  "HTML/CSS", "Bootstrap", "SQL", "REST APIs", "Keras",
+const techRows = [
+  ["Python", "TensorFlow", "PyTorch", "YOLOv8", "OpenCV", "Scikit-learn", "Flask"],
+  ["Streamlit", "NumPy", "Pandas", "TensorRT", "NLP", "Keras", "Docker"],
+  ["Git", "Linux", "HTML/CSS", "Bootstrap", "SQL", "REST APIs", "Deep Learning"],
 ];
 
 const TechStackSection = () => {
@@ -13,33 +12,63 @@ const TechStackSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-32 px-6" ref={ref}>
-      <div className="max-w-5xl mx-auto">
+    <section className="relative py-32 overflow-hidden" ref={ref}>
+      <div className="max-w-6xl mx-auto px-6 md:px-12 mb-16">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="flex items-center gap-3 mb-6"
         >
-          <p className="text-sm text-primary font-mono tracking-widest mb-3">06 — TECH STACK</p>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-16" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Tools I <span className="text-gradient">use</span>
-          </h2>
+          <span className="text-xs tracking-[0.3em] uppercase text-primary font-medium"
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+          >
+            06 — Tech Stack
+          </span>
+          <span className="flex-1 h-[1px] bg-border max-w-[200px]" />
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {techs.map((tech, i) => (
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="text-4xl md:text-6xl font-bold tracking-tight"
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        >
+          Tools I <span className="text-gradient">wield</span>
+        </motion.h2>
+      </div>
+
+      {/* Scrolling rows */}
+      <div className="space-y-4">
+        {techRows.map((row, rowIdx) => (
+          <div key={rowIdx} className="relative overflow-hidden py-2">
             <motion.div
-              key={tech}
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-              whileHover={{ y: -5, scale: 1.05 }}
-              className="p-4 rounded-xl bg-card border border-border hover:border-primary/40 transition-all text-center group cursor-default"
+              className="flex gap-4 whitespace-nowrap"
+              style={{
+                animation: `${rowIdx % 2 === 0 ? "marquee" : "marquee-reverse"} ${30 + rowIdx * 5}s linear infinite`,
+              }}
             >
-              <p className="text-sm font-medium group-hover:text-primary transition-colors">{tech}</p>
+              {[...row, ...row, ...row, ...row].map((tech, i) => (
+                <motion.div
+                  key={`${tech}-${i}`}
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ delay: 0.3 + (i % row.length) * 0.05 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="px-6 py-3 rounded-full glass-card hover:border-primary/40 transition-all cursor-default group shrink-0"
+                >
+                  <span className="text-sm font-medium group-hover:text-primary transition-colors"
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  >
+                    {tech}
+                  </span>
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );

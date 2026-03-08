@@ -7,84 +7,146 @@ interface LoadingScreenProps {
 
 const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
+  const [phase, setPhase] = useState<"loading" | "reveal">("loading");
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 400);
+          setPhase("reveal");
+          setTimeout(onComplete, 800);
           return 100;
         }
-        return prev + 2;
+        return prev + 1;
       });
-    }, 30);
+    }, 25);
     return () => clearInterval(interval);
   }, [onComplete]);
 
-  const marqueeText = "AI/ML ENGINEER • SOFTWARE DEVELOPER • DEEP LEARNING • COMPUTER VISION • ";
+  const marqueeText = "AI/ML ENGINEER  •  SOFTWARE DEVELOPER  •  DEEP LEARNING  •  COMPUTER VISION  •  ";
 
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
-        exit={{ opacity: 0, scale: 1.05 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background noise-overlay"
+        exit={{ 
+          clipPath: "circle(0% at 50% 50%)",
+        }}
+        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
       >
-        {/* Marquee */}
-        <div className="absolute top-1/3 w-full overflow-hidden opacity-10">
+        {/* Ambient orbs */}
+        <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="whitespace-nowrap text-6xl md:text-8xl font-bold tracking-tighter"
-            animate={{ x: [0, -2000] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            className="absolute w-[600px] h-[600px] rounded-full blur-[150px] opacity-20"
+            style={{ background: "hsl(var(--primary))", top: "20%", left: "-10%" }}
+            animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute w-[400px] h-[400px] rounded-full blur-[120px] opacity-15"
+            style={{ background: "hsl(var(--accent))", bottom: "10%", right: "-5%" }}
+            animate={{ x: [0, -80, 0], y: [0, 60, 0] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+
+        {/* Top marquee row */}
+        <div className="absolute w-[200vw] overflow-hidden" style={{ top: "35%" }}>
+          <motion.div
+            className="whitespace-nowrap flex"
+            style={{ animation: "marquee 20s linear infinite" }}
           >
-            {marqueeText.repeat(5)}
+            <span
+              className="text-[8vw] font-bold tracking-[-0.04em] text-foreground/[0.06]"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              {marqueeText.repeat(4)}
+            </span>
+            <span
+              className="text-[8vw] font-bold tracking-[-0.04em] text-foreground/[0.06]"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              {marqueeText.repeat(4)}
+            </span>
           </motion.div>
         </div>
 
-        {/* Center content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center gap-8"
-        >
-          <motion.h1
-            className="text-5xl md:text-7xl font-bold tracking-tighter"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        {/* Bottom marquee row */}
+        <div className="absolute w-[200vw] overflow-hidden" style={{ top: "55%" }}>
+          <motion.div
+            className="whitespace-nowrap flex"
+            style={{ animation: "marquee-reverse 25s linear infinite" }}
           >
-            <span className="text-gradient">PK</span>
-          </motion.h1>
+            <span
+              className="text-[8vw] font-bold tracking-[-0.04em] text-foreground/[0.06]"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              {marqueeText.repeat(4)}
+            </span>
+            <span
+              className="text-[8vw] font-bold tracking-[-0.04em] text-foreground/[0.06]"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
+              {marqueeText.repeat(4)}
+            </span>
+          </motion.div>
+        </div>
 
-          {/* Progress bar */}
-          <div className="w-64 md:w-80">
-            <div className="flex justify-between mb-2 text-xs text-muted-foreground font-mono">
-              <span>LOADING</span>
-              <span>{progress}%</span>
+        {/* Center pill loader — inspired by reference */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10"
+        >
+          {/* Outer pill with gradient border */}
+          <div className="relative px-12 py-5 rounded-full overflow-hidden" 
+            style={{ background: "hsl(var(--card))" }}
+          >
+            {/* Gradient border effect */}
+            <div className="absolute inset-0 rounded-full p-[2px]">
+              <div className="absolute inset-0 rounded-full" style={{
+                background: `conic-gradient(from ${progress * 3.6}deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)))`,
+                opacity: 0.6,
+              }} />
+              <div className="absolute inset-[2px] rounded-full bg-card" />
             </div>
-            <div className="h-[2px] w-full bg-secondary rounded-full overflow-hidden">
-              <motion.div
-                className="h-full rounded-full"
-                style={{
-                  width: `${progress}%`,
-                  background: `linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))`,
-                }}
-              />
+
+            {/* Content */}
+            <div className="relative z-10 flex items-center gap-8">
+              <motion.span 
+                className="text-sm font-medium tracking-[0.2em] text-foreground/60"
+                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                LOADING
+              </motion.span>
+              <div className="w-[1px] h-5 bg-foreground/10" />
+              <motion.span 
+                className="text-sm font-bold tracking-wider text-gradient tabular-nums"
+                style={{ fontFamily: "'JetBrains Mono', monospace", minWidth: "3ch" }}
+              >
+                {progress}%
+              </motion.span>
             </div>
           </div>
         </motion.div>
 
-        {/* Bottom marquee */}
-        <div className="absolute bottom-1/3 w-full overflow-hidden opacity-10">
-          <motion.div
-            className="whitespace-nowrap text-6xl md:text-8xl font-bold tracking-tighter"
-            animate={{ x: [-2000, 0] }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-          >
-            {marqueeText.repeat(5)}
-          </motion.div>
-        </div>
+        {/* Welcome text that appears at 100% */}
+        <AnimatePresence>
+          {phase === "reveal" && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="absolute bottom-[30%] text-sm tracking-[0.5em] uppercase text-primary font-medium"
+              style={{ fontFamily: "'JetBrains Mono', monospace" }}
+            >
+              Welcome
+            </motion.p>
+          )}
+        </AnimatePresence>
       </motion.div>
     </AnimatePresence>
   );
