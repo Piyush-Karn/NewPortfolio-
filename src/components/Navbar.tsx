@@ -102,14 +102,25 @@ const Navbar = () => {
             </motion.a>
           </div>
 
-          {/* Mobile menu button */}
-          <motion.button
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-full glass-card"
-            onClick={() => setMenuOpen(!menuOpen)}
-            whileTap={{ scale: 0.9 }}
-          >
-            {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-          </motion.button>
+          {/* Mobile: theme toggle + menu button */}
+          <div className="md:hidden flex items-center gap-2">
+            {mounted && (
+              <motion.button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="w-10 h-10 flex items-center justify-center rounded-full glass-card"
+                whileTap={{ scale: 0.9 }}
+              >
+                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </motion.button>
+            )}
+            <motion.button
+              className="w-10 h-10 flex items-center justify-center rounded-full glass-card"
+              onClick={() => setMenuOpen(!menuOpen)}
+              whileTap={{ scale: 0.9 }}
+            >
+              {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </motion.button>
+          </div>
         </div>
       </motion.nav>
 
