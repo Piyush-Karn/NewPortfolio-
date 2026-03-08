@@ -10,6 +10,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import AchievementsSection from "@/components/AchievementsSection";
 import TechStackSection from "@/components/TechStackSection";
 import ContactSection from "@/components/ContactSection";
+import SectionWrapper from "@/components/SectionWrapper";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -29,13 +30,34 @@ const Index = () => {
           >
             <Navbar />
             <HeroSection />
-            <AboutSection />
-            <SkillsSection />
-            <ExperienceSection />
-            <ProjectsSection />
-            <AchievementsSection />
-            <TechStackSection />
-            <ContactSection />
+
+            <SectionWrapper effect="slide-right" parallaxIntensity={0.35}>
+              <AboutSection />
+            </SectionWrapper>
+
+            <SectionWrapper effect="flip-up" parallaxIntensity={0.25}>
+              <SkillsSection />
+            </SectionWrapper>
+
+            <SectionWrapper effect="slide-left" parallaxIntensity={0.3}>
+              <ExperienceSection />
+            </SectionWrapper>
+
+            <SectionWrapper effect="flip-left" parallaxIntensity={0.35}>
+              <ProjectsSection />
+            </SectionWrapper>
+
+            <SectionWrapper effect="zoom-rotate" parallaxIntensity={0.2}>
+              <AchievementsSection />
+            </SectionWrapper>
+
+            <SectionWrapper effect="swing" parallaxIntensity={0.3}>
+              <TechStackSection />
+            </SectionWrapper>
+
+            <SectionWrapper effect="spiral" parallaxIntensity={0.25}>
+              <ContactSection />
+            </SectionWrapper>
           </motion.div>
         )}
       </AnimatePresence>
