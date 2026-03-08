@@ -15,12 +15,13 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         if (prev >= 100) {
           clearInterval(interval);
           setPhase("reveal");
-          setTimeout(onComplete, 800);
+          setTimeout(onComplete, 500);
           return 100;
         }
-        return prev + 1;
+        // Accelerate progress — larger jumps
+        return Math.min(100, prev + 2 + Math.floor(Math.random() * 2));
       });
-    }, 25);
+    }, 20);
     return () => clearInterval(interval);
   }, [onComplete]);
 
