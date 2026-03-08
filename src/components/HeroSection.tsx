@@ -11,9 +11,9 @@ const stats = [
 ];
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:contact@example.com", label: "Email" },
+  { icon: Github, href: "https://github.com/piyushkumar-prog", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/piyush-kumar-b15839257/", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:piyushkumar97430@gmail.com", label: "Email" },
 ];
 
 const HeroSection = () => {
@@ -233,7 +233,7 @@ const HeroSection = () => {
           </motion.a>
 
           <motion.a
-            href="/Piyush-Kumar-Resume.pdf"
+            href="https://aiwithpiyush.netlify.app/Resume/Piyush_Kumar_Resume.pdf"
             download
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

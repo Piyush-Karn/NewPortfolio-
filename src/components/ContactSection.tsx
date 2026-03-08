@@ -6,9 +6,9 @@ import {
 } from "lucide-react";
 
 const links = [
-  { icon: Mail, label: "Email", value: "piyushkarn96@gmail.com", href: "mailto:piyushkarn96@gmail.com" },
-  { icon: Linkedin, label: "LinkedIn", value: "piyushkumar-ai", href: "https://linkedin.com/in/piyushkumar-ai/" },
-  { icon: Github, label: "GitHub", value: "github.com/piyush", href: "https://github.com/" },
+  { icon: Mail, label: "Email", value: "piyushkumar97430@gmail.com", href: "mailto:piyushkumar97430@gmail.com" },
+  { icon: Linkedin, label: "LinkedIn", value: "piyush-kumar-b15839257", href: "https://www.linkedin.com/in/piyush-kumar-b15839257/" },
+  { icon: Github, label: "GitHub", value: "piyushkumar-prog", href: "https://github.com/piyushkumar-prog" },
   { icon: Globe, label: "Portfolio", value: "aiwithpiyush.netlify.app", href: "https://aiwithpiyush.netlify.app" },
 ];
 
@@ -127,7 +127,7 @@ const ContactSection = () => {
               </motion.button>
 
               <motion.a
-                href="mailto:piyushkarn96@gmail.com"
+                href="mailto:piyushkumar97430@gmail.com"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="group/btn relative flex items-center gap-2 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm overflow-hidden"
