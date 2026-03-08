@@ -63,24 +63,18 @@ const HeroSection = () => {
         </span>
       </motion.div>
 
-      {/* Floating orbs */}
+      {/* Floating orbs — static, no infinite animations to reduce GPU load */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full blur-[200px]"
+        className="absolute w-[500px] h-[500px] rounded-full blur-[100px] will-change-transform"
         style={{ background: "hsl(var(--primary) / 0.15)", top: "10%", right: "5%", y: nameY }}
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 8, repeat: Infinity }}
       />
-      <motion.div
-        className="absolute w-[300px] h-[300px] rounded-full blur-[150px]"
+      <div
+        className="absolute w-[300px] h-[300px] rounded-full blur-[80px]"
         style={{ background: "hsl(var(--accent) / 0.1)", bottom: "20%", left: "10%" }}
-        animate={{ scale: [1, 1.3, 1], x: [0, 30, 0] }}
-        transition={{ duration: 10, repeat: Infinity }}
       />
-      <motion.div
-        className="absolute w-[200px] h-[200px] rounded-full blur-[120px]"
+      <div
+        className="absolute w-[200px] h-[200px] rounded-full blur-[60px]"
         style={{ background: "hsl(var(--neon) / 0.08)", top: "40%", left: "50%" }}
-        animate={{ scale: [1, 1.4, 1], y: [0, -40, 0] }}
-        transition={{ duration: 12, repeat: Infinity }}
       />
 
       {/* Decorative lines */}
