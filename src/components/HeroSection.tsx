@@ -273,10 +273,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 2, duration: 0.6 }}
         >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
+          <div className="animate-spin" style={{ animationDuration: "20s" }}>
             <svg width="120" height="120" viewBox="0 0 100 100" className="text-muted-foreground/20">
               <path id="textCircle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
               <text fontSize="10" fill="currentColor" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
