@@ -45,28 +45,22 @@ const AchievementsSection = () => {
           {/* Gradient background */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-transparent" />
           
-          {/* Floating decorative elements */}
-          <motion.div
-            className="absolute -top-6 -right-6 w-32 h-32 rounded-full blur-[60px]"
-            style={{ background: "hsl(var(--primary) / 0.2)" }}
-            animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 4, repeat: Infinity }}
+          {/* Floating decorative elements — static to reduce GPU load */}
+          <div
+            className="absolute -top-6 -right-6 w-32 h-32 rounded-full blur-[40px]"
+            style={{ background: "hsl(var(--primary) / 0.2)", opacity: 0.5 }}
           />
-          <motion.div
-            className="absolute bottom-0 left-0 w-24 h-24 rounded-full blur-[50px]"
+          <div
+            className="absolute bottom-0 left-0 w-24 h-24 rounded-full blur-[30px]"
             style={{ background: "hsl(var(--accent) / 0.15)" }}
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 5, repeat: Infinity }}
           />
 
           <div className="relative z-10 p-10 md:p-14 flex flex-col md:flex-row items-start gap-8">
-            <motion.div
+            <div
               className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0"
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
             >
               <Trophy className="w-10 h-10 text-primary" />
-            </motion.div>
+            </div>
 
             <div>
               <div className="flex items-center gap-3 mb-3">

@@ -63,24 +63,18 @@ const HeroSection = () => {
         </span>
       </motion.div>
 
-      {/* Floating orbs */}
+      {/* Floating orbs — static, no infinite animations to reduce GPU load */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full blur-[200px]"
+        className="absolute w-[500px] h-[500px] rounded-full blur-[100px] will-change-transform"
         style={{ background: "hsl(var(--primary) / 0.15)", top: "10%", right: "5%", y: nameY }}
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 8, repeat: Infinity }}
       />
-      <motion.div
-        className="absolute w-[300px] h-[300px] rounded-full blur-[150px]"
+      <div
+        className="absolute w-[300px] h-[300px] rounded-full blur-[80px]"
         style={{ background: "hsl(var(--accent) / 0.1)", bottom: "20%", left: "10%" }}
-        animate={{ scale: [1, 1.3, 1], x: [0, 30, 0] }}
-        transition={{ duration: 10, repeat: Infinity }}
       />
-      <motion.div
-        className="absolute w-[200px] h-[200px] rounded-full blur-[120px]"
+      <div
+        className="absolute w-[200px] h-[200px] rounded-full blur-[60px]"
         style={{ background: "hsl(var(--neon) / 0.08)", top: "40%", left: "50%" }}
-        animate={{ scale: [1, 1.4, 1], y: [0, -40, 0] }}
-        transition={{ duration: 12, repeat: Infinity }}
       />
 
       {/* Decorative lines */}
@@ -279,10 +273,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 2, duration: 0.6 }}
         >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
+          <div className="animate-spin" style={{ animationDuration: "20s" }}>
             <svg width="120" height="120" viewBox="0 0 100 100" className="text-muted-foreground/20">
               <path id="textCircle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
               <text fontSize="10" fill="currentColor" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
@@ -291,7 +282,7 @@ const HeroSection = () => {
                 </textPath>
               </text>
             </svg>
-          </motion.div>
+          </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <ExternalLink className="w-4 h-4 text-muted-foreground/30" />
           </div>
