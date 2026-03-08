@@ -19,9 +19,6 @@ const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const x = useTransform(scrollYProgress, [0, 1], ["-20%", "10%"]);
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
     <section id="about" className="relative py-32 overflow-hidden" ref={containerRef}>
