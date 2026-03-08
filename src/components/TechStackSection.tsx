@@ -1,27 +1,31 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Sparkles, Terminal, Database, Cpu, Wrench } from "lucide-react";
+import { Sparkles, Terminal, Database, Cpu, Wrench, Brain, Code } from "lucide-react";
 
 const techCategories = [
   {
     label: "AI / ML",
     icon: Cpu,
-    items: ["TensorFlow", "PyTorch", "YOLOv8", "OpenCV", "Scikit-learn", "Keras", "TensorRT"],
+    description: "Building intelligent systems & AI solutions",
+    items: ["TensorFlow", "PyTorch", "YOLOv8", "OpenCV", "Scikit-learn", "Keras", "TensorRT", "Deep Learning"],
   },
   {
-    label: "Data",
+    label: "Data Science",
     icon: Database,
-    items: ["NumPy", "Pandas", "NLP", "Deep Learning", "Computer Vision"],
+    description: "Processing & analyzing complex datasets",
+    items: ["NumPy", "Pandas", "NLP", "Computer Vision", "Data Analysis", "Feature Engineering"],
   },
   {
     label: "Development",
     icon: Terminal,
+    description: "Modern development & scalable applications",
     items: ["Python", "Flask", "Streamlit", "HTML/CSS", "Bootstrap", "REST APIs", "SQL"],
   },
   {
-    label: "DevOps",
+    label: "DevOps & Tools",
     icon: Wrench,
-    items: ["Git", "Docker", "Linux"],
+    description: "Infrastructure & deployment pipelines",
+    items: ["Git", "Docker", "Linux", "VS Code", "Jupyter"],
   },
 ];
 
@@ -31,7 +35,7 @@ const TechStackSection = () => {
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
-    <section className="relative py-32 overflow-hidden" ref={ref}>
+    <section id="skills" className="relative py-32 overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
         <motion.div
@@ -45,7 +49,7 @@ const TechStackSection = () => {
             className="text-xs tracking-[0.3em] uppercase text-primary font-medium"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
-            06 — Tech Stack
+            02 — Skills & Tools
           </span>
           <span className="flex-1 h-[1px] bg-border max-w-[200px]" />
         </motion.div>
@@ -87,9 +91,9 @@ const TechStackSection = () => {
                   >
                     <Icon className={`w-5 h-5 transition-colors ${isActive ? "text-primary" : "text-muted-foreground"}`} />
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <span
-                      className={`text-sm font-semibold transition-colors ${
+                      className={`text-sm font-semibold transition-colors block ${
                         isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
                       }`}
                       style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -97,18 +101,17 @@ const TechStackSection = () => {
                       {cat.label}
                     </span>
                     <p
-                      className="text-[10px] text-muted-foreground mt-0.5"
+                      className="text-[10px] text-muted-foreground mt-0.5 truncate"
                       style={{ fontFamily: "'JetBrains Mono', monospace" }}
                     >
                       {cat.items.length} tools
                     </p>
                   </div>
 
-                  {/* Active indicator */}
                   {isActive && (
                     <motion.div
                       layoutId="activeTab"
-                      className="ml-auto w-1.5 h-8 rounded-full bg-primary"
+                      className="ml-auto w-1.5 h-8 rounded-full bg-primary shrink-0"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
@@ -117,8 +120,20 @@ const TechStackSection = () => {
             })}
           </div>
 
-          {/* Right: active items grid */}
+          {/* Right: active items */}
           <div className="md:col-span-8">
+            {/* Category description */}
+            <motion.p
+              key={`desc-${activeCategory}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-sm text-muted-foreground mb-6"
+              style={{ fontFamily: "'JetBrains Mono', monospace" }}
+            >
+              {techCategories[activeCategory].description}
+            </motion.p>
+
             <motion.div
               key={activeCategory}
               initial={{ opacity: 0, y: 20 }}
@@ -146,7 +161,7 @@ const TechStackSection = () => {
               ))}
             </motion.div>
 
-            {/* Subtle total count */}
+            {/* Total count */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
@@ -166,11 +181,11 @@ const TechStackSection = () => {
         </div>
       </div>
 
-      {/* Background marquee - very subtle */}
+      {/* Background marquee */}
       <div className="mt-20 space-y-3 opacity-20 pointer-events-none">
         {[0, 1].map((rowIdx) => {
           const allItems = techCategories.flatMap((c) => c.items);
-          const row = rowIdx === 0 ? allItems.slice(0, 12) : allItems.slice(12);
+          const row = rowIdx === 0 ? allItems.slice(0, 14) : allItems.slice(14);
           const doubled = [...row, ...row, ...row];
           return (
             <div key={rowIdx} className="overflow-hidden py-1">
