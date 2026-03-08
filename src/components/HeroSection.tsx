@@ -233,7 +233,7 @@ const HeroSection = () => {
           </motion.a>
 
           <motion.a
-            href="/Piyush-Kumar-Resume.pdf"
+            href="https://aiwithpiyush.netlify.app/Resume/Piyush_Kumar_Resume.pdf"
             download
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
