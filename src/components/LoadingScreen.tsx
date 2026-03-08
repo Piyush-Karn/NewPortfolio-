@@ -49,45 +49,45 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         </div>
 
         {/* Top marquee row */}
-        <div className="absolute w-[200vw] overflow-hidden" style={{ top: "35%" }}>
-          <motion.div
+        <div className="absolute left-0 right-0 overflow-hidden" style={{ top: "30%" }}>
+          <div
             className="whitespace-nowrap flex"
-            style={{ animation: "marquee 20s linear infinite" }}
+            style={{ animation: "marquee 20s linear infinite", width: "max-content" }}
           >
             <span
-              className="text-[8vw] font-bold tracking-[-0.04em] text-foreground/[0.06]"
+              className="text-[6vw] font-bold tracking-[-0.04em] text-foreground/[0.04]"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              {marqueeText.repeat(4)}
+              {marqueeText.repeat(3)}
             </span>
             <span
-              className="text-[8vw] font-bold tracking-[-0.04em] text-foreground/[0.06]"
+              className="text-[6vw] font-bold tracking-[-0.04em] text-foreground/[0.04]"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              {marqueeText.repeat(4)}
+              {marqueeText.repeat(3)}
             </span>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom marquee row */}
-        <div className="absolute w-[200vw] overflow-hidden" style={{ top: "55%" }}>
-          <motion.div
+        <div className="absolute left-0 right-0 overflow-hidden" style={{ top: "58%" }}>
+          <div
             className="whitespace-nowrap flex"
-            style={{ animation: "marquee-reverse 25s linear infinite" }}
+            style={{ animation: "marquee-reverse 25s linear infinite", width: "max-content" }}
           >
             <span
-              className="text-[8vw] font-bold tracking-[-0.04em] text-foreground/[0.06]"
+              className="text-[6vw] font-bold tracking-[-0.04em] text-foreground/[0.04]"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              {marqueeText.repeat(4)}
+              {marqueeText.repeat(3)}
             </span>
             <span
-              className="text-[8vw] font-bold tracking-[-0.04em] text-foreground/[0.06]"
+              className="text-[6vw] font-bold tracking-[-0.04em] text-foreground/[0.04]"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              {marqueeText.repeat(4)}
+              {marqueeText.repeat(3)}
             </span>
-          </motion.div>
+          </div>
         </div>
 
         {/* Center pill loader — inspired by reference */}
