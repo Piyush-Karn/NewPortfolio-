@@ -1,44 +1,38 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Terminal, Database, Cpu, Wrench } from "lucide-react";
 
 const techCategories = [
   {
     label: "AI / ML",
+    icon: Cpu,
     items: ["TensorFlow", "PyTorch", "YOLOv8", "OpenCV", "Scikit-learn", "Keras", "TensorRT"],
   },
   {
-    label: "Data & Analysis",
+    label: "Data",
+    icon: Database,
     items: ["NumPy", "Pandas", "NLP", "Deep Learning", "Computer Vision"],
   },
   {
     label: "Development",
+    icon: Terminal,
     items: ["Python", "Flask", "Streamlit", "HTML/CSS", "Bootstrap", "REST APIs", "SQL"],
   },
   {
-    label: "DevOps & Tools",
+    label: "DevOps",
+    icon: Wrench,
     items: ["Git", "Docker", "Linux"],
   },
 ];
 
-const allTech = techCategories.flatMap((c) => c.items);
-
-const marqueeRow1 = [...allTech.slice(0, 10), ...allTech.slice(0, 10)];
-const marqueeRow2 = [...allTech.slice(10), ...allTech.slice(10)];
-
 const TechStackSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-
-  const getActiveItems = activeCategory
-    ? techCategories.find((c) => c.label === activeCategory)?.items ?? []
-    : allTech;
+  const [activeCategory, setActiveCategory] = useState(0);
 
   return (
     <section className="relative py-32 overflow-hidden" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -60,113 +54,145 @@ const TechStackSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-16"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           Tools I <span className="text-gradient">wield</span>
         </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-muted-foreground max-w-lg mb-12 text-lg"
-        >
-          From model training to deployment — the ecosystem I work with daily.
-        </motion.p>
+        {/* Category tabs + content */}
+        <div className="grid md:grid-cols-12 gap-8">
+          {/* Left: category tabs */}
+          <div className="md:col-span-4 space-y-3">
+            {techCategories.map((cat, i) => {
+              const Icon = cat.icon;
+              const isActive = activeCategory === i;
+              return (
+                <motion.button
+                  key={cat.label}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
+                  onClick={() => setActiveCategory(i)}
+                  className={`w-full group flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-400 border ${
+                    isActive
+                      ? "glass-card border-primary/30 bg-primary/5"
+                      : "border-transparent hover:border-border hover:bg-secondary/30"
+                  }`}
+                >
+                  <div
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                      isActive ? "bg-primary/20" : "bg-secondary/60 group-hover:bg-secondary"
+                    }`}
+                  >
+                    <Icon className={`w-5 h-5 transition-colors ${isActive ? "text-primary" : "text-muted-foreground"}`} />
+                  </div>
+                  <div>
+                    <span
+                      className={`text-sm font-semibold transition-colors ${
+                        isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+                      }`}
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    >
+                      {cat.label}
+                    </span>
+                    <p
+                      className="text-[10px] text-muted-foreground mt-0.5"
+                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                    >
+                      {cat.items.length} tools
+                    </p>
+                  </div>
 
-        {/* Category filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-wrap gap-3 mb-12"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setActiveCategory(null)}
-            className={`px-4 py-2 rounded-full text-xs font-medium transition-all border ${
-              !activeCategory
-                ? "bg-primary text-primary-foreground border-primary"
-                : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
-            }`}
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            All
-          </motion.button>
-          {techCategories.map((cat) => (
-            <motion.button
-              key={cat.label}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveCategory(activeCategory === cat.label ? null : cat.label)}
-              className={`px-4 py-2 rounded-full text-xs font-medium transition-all border ${
-                activeCategory === cat.label
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
-              }`}
-              style={{ fontFamily: "'JetBrains Mono', monospace" }}
-            >
-              {cat.label}
-            </motion.button>
-          ))}
-        </motion.div>
+                  {/* Active indicator */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="ml-auto w-1.5 h-8 rounded-full bg-primary"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </motion.button>
+              );
+            })}
+          </div>
 
-        {/* Grid view */}
-        <motion.div
-          layout
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
-        >
-          {getActiveItems.map((tech, i) => (
+          {/* Right: active items grid */}
+          <div className="md:col-span-8">
             <motion.div
-              key={tech}
-              layout
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ delay: i * 0.03, duration: 0.4 }}
-              onMouseEnter={() => setHoveredTech(tech)}
-              onMouseLeave={() => setHoveredTech(null)}
-              whileHover={{ scale: 1.08, y: -4 }}
-              className={`relative p-4 rounded-2xl glass-card text-center cursor-default transition-all duration-300 group overflow-hidden ${
-                hoveredTech === tech ? "border-primary/40" : ""
-              }`}
+              key={activeCategory}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-2 sm:grid-cols-3 gap-4"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {techCategories[activeCategory].items.map((tech, i) => (
+                <motion.div
+                  key={tech}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.06, duration: 0.4, type: "spring" }}
+                  whileHover={{ scale: 1.06, y: -4 }}
+                  className="group relative p-6 rounded-2xl glass-card hover:border-primary/40 cursor-default transition-all duration-300 overflow-hidden text-center"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <span
+                    className="relative z-10 text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors"
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  >
+                    {tech}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Subtle total count */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.8 }}
+              className="mt-8 flex items-center gap-3"
+            >
+              <div className="h-[1px] flex-1 bg-border" />
               <span
-                className="relative z-10 text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors"
+                className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
-                {tech}
+                {techCategories.reduce((acc, c) => acc + c.items.length, 0)} technologies total
               </span>
+              <div className="h-[1px] flex-1 bg-border" />
             </motion.div>
-          ))}
-        </motion.div>
+          </div>
+        </div>
       </div>
 
-      {/* Marquee rows */}
-      <div className="mt-16 space-y-4 opacity-40">
-        {[marqueeRow1, marqueeRow2].map((row, rowIdx) => (
-          <div key={rowIdx} className="relative overflow-hidden py-2">
-            <div
-              className="flex gap-4 whitespace-nowrap"
-              style={{
-                animation: `${rowIdx % 2 === 0 ? "marquee" : "marquee-reverse"} ${35 + rowIdx * 5}s linear infinite`,
-              }}
-            >
-              {row.map((tech, i) => (
-                <div
-                  key={`${tech}-${i}`}
-                  className="px-5 py-2.5 rounded-full border border-border/30 text-xs text-muted-foreground shrink-0"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                >
-                  {tech}
-                </div>
-              ))}
+      {/* Background marquee - very subtle */}
+      <div className="mt-20 space-y-3 opacity-20 pointer-events-none">
+        {[0, 1].map((rowIdx) => {
+          const allItems = techCategories.flatMap((c) => c.items);
+          const row = rowIdx === 0 ? allItems.slice(0, 12) : allItems.slice(12);
+          const doubled = [...row, ...row, ...row];
+          return (
+            <div key={rowIdx} className="overflow-hidden py-1">
+              <div
+                className="flex gap-4 whitespace-nowrap"
+                style={{
+                  animation: `${rowIdx === 0 ? "marquee" : "marquee-reverse"} ${40 + rowIdx * 8}s linear infinite`,
+                }}
+              >
+                {doubled.map((tech, i) => (
+                  <span
+                    key={`${tech}-${i}`}
+                    className="px-4 py-2 rounded-full border border-border/20 text-xs text-muted-foreground shrink-0"
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

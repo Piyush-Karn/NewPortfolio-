@@ -1,51 +1,27 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
-import { Brain, Code, ChevronRight, Zap, Layers, Sparkles } from "lucide-react";
+import { Brain, Code, Sparkles } from "lucide-react";
 
 const skillSets = [
   {
     icon: Brain,
-    accentIcon: Zap,
-    title: "AI/ML DEVELOPER",
-    subtitle: "Building intelligent systems & AI solutions",
+    title: "AI/ML",
+    subtitle: "DEVELOPER",
+    tagline: "Building intelligent systems & AI solutions",
     description:
-      "Developing AI agents, machine learning models using Python, TensorFlow, and PyTorch. Specializing in deep learning, NLP, computer vision, and autonomous systems.",
-    skills: [
-      { name: "TensorFlow", level: 90 },
-      { name: "PyTorch", level: 85 },
-      { name: "YOLOv8", level: 88 },
-      { name: "OpenCV", level: 85 },
-      { name: "NLP", level: 80 },
-      { name: "Scikit-learn", level: 82 },
-      { name: "TensorRT", level: 75 },
-      { name: "Keras", level: 88 },
-      { name: "NumPy", level: 90 },
-      { name: "Pandas", level: 88 },
-    ],
-    gradient: "from-primary/10 via-transparent to-accent/5",
-    borderHover: "hover:border-primary/40",
+      "Developing AI agents and ML models with Python, TensorFlow & PyTorch. Deep learning, NLP, computer vision, and autonomous systems.",
+    skills: ["TensorFlow", "PyTorch", "YOLOv8", "OpenCV", "NLP", "Scikit-learn", "TensorRT", "Keras", "NumPy", "Pandas"],
+    accentColor: "primary",
   },
   {
     icon: Code,
-    accentIcon: Layers,
-    title: "SOFTWARE DEVELOPER",
-    subtitle: "Modern development & scalable applications",
+    title: "SOFTWARE",
+    subtitle: "DEVELOPER",
+    tagline: "Modern development & scalable applications",
     description:
-      "Building robust applications using Python, Flask, and modern web technologies. Creating seamless experiences with clean architecture and best practices.",
-    skills: [
-      { name: "Python", level: 92 },
-      { name: "HTML/CSS", level: 85 },
-      { name: "Flask", level: 80 },
-      { name: "Streamlit", level: 78 },
-      { name: "Git", level: 85 },
-      { name: "Bootstrap", level: 75 },
-      { name: "REST APIs", level: 82 },
-      { name: "SQL", level: 80 },
-      { name: "Docker", level: 72 },
-      { name: "Linux", level: 78 },
-    ],
-    gradient: "from-accent/10 via-transparent to-primary/5",
-    borderHover: "hover:border-accent/40",
+      "Building robust applications with Python, Flask & modern web tech. Clean architecture, REST APIs, and production-ready systems.",
+    skills: ["Python", "HTML/CSS", "Flask", "Streamlit", "Git", "Bootstrap", "REST APIs", "SQL", "Docker", "Linux"],
+    accentColor: "accent",
   },
 ];
 
@@ -53,7 +29,6 @@ const SkillsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
   const bgX = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
@@ -62,14 +37,14 @@ const SkillsSection = () => {
     <section id="skills" className="relative py-32 overflow-hidden" ref={containerRef}>
       {/* Large background text */}
       <motion.div
-        className="absolute top-16 whitespace-nowrap pointer-events-none select-none"
+        className="absolute top-20 whitespace-nowrap pointer-events-none select-none"
         style={{ x: bgX }}
       >
         <span
-          className="text-[12vw] font-bold tracking-[-0.04em] text-stroke opacity-20"
+          className="text-[14vw] font-bold tracking-[-0.04em] text-stroke opacity-20"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
-          SKILLSET
+          SKILLS
         </span>
       </motion.div>
 
@@ -95,120 +70,144 @@ const SkillsSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-20"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
-          Skillset & <span className="text-gradient">tools</span>
+          Skillset & <span className="text-gradient">expertise</span>
         </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-muted-foreground max-w-lg mb-16 text-lg"
-        >
-          A deep toolkit spanning AI research and production-grade software engineering.
-        </motion.p>
-
-        {/* Cards */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Cards - stacked editorial layout */}
+        <div className="space-y-8">
           {skillSets.map((set, i) => (
             <motion.div
               key={set.title}
-              initial={{ opacity: 0, y: 60 }}
+              initial={{ opacity: 0, y: 80 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + i * 0.2, duration: 0.7 }}
+              transition={{ delay: 0.3 + i * 0.25, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               onMouseEnter={() => setHoveredCard(i)}
               onMouseLeave={() => setHoveredCard(null)}
-              className={`group relative rounded-3xl overflow-hidden glass-card transition-all duration-500 ${set.borderHover}`}
+              className="group relative rounded-3xl overflow-hidden glass-card hover:border-primary/30 transition-all duration-500"
             >
-              {/* Gradient overlay */}
-              <motion.div
-                className={`absolute inset-0 bg-gradient-to-br ${set.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
+              {/* Hover gradient */}
+              <div
+                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ${
+                  i === 0
+                    ? "bg-gradient-to-br from-primary/8 via-transparent to-accent/5"
+                    : "bg-gradient-to-br from-accent/8 via-transparent to-primary/5"
+                }`}
+              />
+              {/* Corner glow */}
+              <div
+                className={`absolute ${i === 0 ? "-top-24 -left-24" : "-top-24 -right-24"} w-48 h-48 rounded-full blur-3xl transition-all duration-700 ${
+                  hoveredCard === i ? "bg-primary/15" : "bg-primary/5"
+                }`}
               />
 
-              {/* Decorative corner accent */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-all duration-700" />
-
-              <div className="relative z-10 p-8 md:p-10">
-                {/* Header row */}
-                <div className="flex items-start justify-between mb-8">
-                  <div className="flex items-center gap-4">
+              <div className="relative z-10 grid md:grid-cols-12 gap-8 p-8 md:p-12">
+                {/* Left: title block */}
+                <div className="md:col-span-5 flex flex-col justify-between">
+                  <div>
                     <motion.div
-                      className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/10 group-hover:border-primary/30 transition-colors"
-                      animate={hoveredCard === i ? { rotate: [0, -10, 10, 0], scale: 1.1 } : {}}
+                      className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 border border-primary/10 group-hover:border-primary/30 transition-colors"
+                      animate={hoveredCard === i ? { rotate: [0, -8, 8, 0] } : {}}
                       transition={{ duration: 0.5 }}
                     >
-                      <set.icon className="w-8 h-8 text-primary" />
+                      <set.icon className="w-7 h-7 text-primary" />
                     </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: 0.6 + i * 0.2, type: "spring" }}
-                      className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center"
+
+                    <div className="mb-4">
+                      <h3
+                        className="text-3xl md:text-4xl font-bold tracking-tight leading-none"
+                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                      >
+                        {set.title}
+                      </h3>
+                      <h3
+                        className="text-3xl md:text-4xl font-bold tracking-tight leading-none text-gradient-static"
+                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                      >
+                        {set.subtitle}
+                      </h3>
+                    </div>
+
+                    <p
+                      className="text-xs tracking-[0.15em] uppercase text-primary/70 mb-4"
+                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
                     >
-                      <set.accentIcon className="w-4 h-4 text-accent" />
-                    </motion.div>
+                      {set.tagline}
+                    </p>
+
+                    <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+                      {set.description}
+                    </p>
                   </div>
+
+                  {/* Skill count badge */}
                   <motion.div
-                    className="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:border-primary/50 group-hover:bg-primary/10 transition-all"
-                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ delay: 0.8 + i * 0.2 }}
+                    className="hidden md:flex items-center gap-3 mt-8"
                   >
-                    <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <span
+                      className="text-4xl font-bold text-primary/30"
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    >
+                      {set.skills.length}
+                    </span>
+                    <span
+                      className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground"
+                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                    >
+                      Core
+                      <br />
+                      Technologies
+                    </span>
                   </motion.div>
                 </div>
 
-                <h3
-                  className="text-xl md:text-2xl font-bold mb-2 tracking-tight"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                >
-                  {set.title}
-                </h3>
-                <p className="text-sm text-primary/80 mb-3">{set.subtitle}</p>
-                <p className="text-sm text-muted-foreground mb-8 leading-relaxed">{set.description}</p>
-
-                {/* Skills with progress indicators */}
-                <div className="space-y-3">
-                  {set.skills.map((skill, j) => (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ delay: 0.5 + i * 0.1 + j * 0.05, duration: 0.4 }}
-                      onMouseEnter={() => setHoveredSkill(skill.name)}
-                      onMouseLeave={() => setHoveredSkill(null)}
-                      className="group/skill cursor-default"
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span
-                          className={`text-xs font-medium transition-colors duration-300 ${
-                            hoveredSkill === skill.name ? "text-primary" : "text-foreground/70"
-                          }`}
-                          style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                        >
-                          {skill.name}
-                        </span>
-                        <motion.span
-                          initial={{ opacity: 0 }}
-                          animate={hoveredSkill === skill.name ? { opacity: 1 } : { opacity: 0 }}
-                          className="text-[10px] text-primary/70"
-                          style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                        >
-                          {skill.level}%
-                        </motion.span>
-                      </div>
-                      <div className="h-1 rounded-full bg-secondary overflow-hidden">
-                        <motion.div
-                          className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-                          initial={{ width: 0 }}
-                          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                          transition={{ delay: 0.8 + i * 0.1 + j * 0.06, duration: 0.8, ease: "easeOut" }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
+                {/* Right: skills cloud */}
+                <div className="md:col-span-7 flex items-center">
+                  <div className="flex flex-wrap gap-3">
+                    {set.skills.map((skill, j) => (
+                      <motion.div
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                        animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+                        transition={{
+                          delay: 0.5 + i * 0.15 + j * 0.05,
+                          duration: 0.5,
+                          type: "spring",
+                          stiffness: 200,
+                        }}
+                        whileHover={{
+                          scale: 1.12,
+                          y: -4,
+                          transition: { duration: 0.2 },
+                        }}
+                        className="group/skill relative cursor-default"
+                      >
+                        <div className="px-5 py-3 rounded-2xl bg-secondary/60 border border-border hover:border-primary/40 hover:bg-primary/10 transition-all duration-300">
+                          <span
+                            className="text-sm font-medium text-foreground/70 group-hover/skill:text-primary transition-colors"
+                            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                          >
+                            {skill}
+                          </span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
+
+              {/* Bottom decorative line */}
+              <motion.div
+                className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-primary via-accent to-transparent"
+                initial={{ width: "0%" }}
+                animate={hoveredCard === i ? { width: "100%" } : { width: "0%" }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              />
             </motion.div>
           ))}
         </div>
