@@ -63,17 +63,17 @@ const HeroSection = () => {
         </span>
       </motion.div>
 
-      {/* Floating orbs — static, no infinite animations to reduce GPU load */}
+      {/* Floating orbs — hidden on mobile for performance */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full blur-[100px] will-change-transform"
+        className="hidden md:block absolute w-[500px] h-[500px] rounded-full blur-[80px]"
         style={{ background: "hsl(var(--primary) / 0.15)", top: "10%", right: "5%", y: nameY }}
       />
       <div
-        className="absolute w-[300px] h-[300px] rounded-full blur-[80px]"
+        className="hidden md:block absolute w-[300px] h-[300px] rounded-full blur-[60px]"
         style={{ background: "hsl(var(--accent) / 0.1)", bottom: "20%", left: "10%" }}
       />
       <div
-        className="absolute w-[200px] h-[200px] rounded-full blur-[60px]"
+        className="hidden md:block absolute w-[200px] h-[200px] rounded-full blur-[40px]"
         style={{ background: "hsl(var(--neon) / 0.08)", top: "40%", left: "50%" }}
       />
 
