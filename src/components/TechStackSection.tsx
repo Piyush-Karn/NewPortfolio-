@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { Sparkles, Terminal, Database, Cpu, Wrench, Brain, Code } from "lucide-react";
 
