@@ -164,7 +164,6 @@ const AboutSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1, duration: 0.7 }}
-              style={{ y: parallaxY }}
               className="relative p-6 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 overflow-hidden"
             >
               <div className="absolute -top-2 -left-1 text-6xl font-bold text-primary/10 leading-none" style={{ fontFamily: "Georgia, serif" }}>"</div>
