@@ -56,10 +56,8 @@ const AchievementsSection = () => {
           />
 
           <div className="relative z-10 p-10 md:p-14 flex flex-col md:flex-row items-start gap-8">
-            <motion.div
+            <div
               className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0"
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
             >
               <Trophy className="w-10 h-10 text-primary" />
             </motion.div>
