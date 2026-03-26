@@ -14,7 +14,7 @@ const projects = [
     highlights: ["60+ FPS real-time inference", "Multi-camera feed processing", "Edge-optimized deployment", "Custom-trained on space station datasets"],
     gradient: "from-primary/20 to-accent/10",
     github: "https://github.com/Piyush-Karn/Visionx",
-    live: "https://drive.google.com/file/d/1rEJLyOR0bcBAR9EdYqOND9v9tzY8BO5y/view",
+    live: "https://huggingface.co/spaces/PiyushKarn/VisionX",
     year: "2024",
   },
   {
