@@ -7,8 +7,8 @@ import {
 
 const links = [
   { icon: Mail, label: "Email", value: "piyushkumar97430@gmail.com", href: "mailto:piyushkumar97430@gmail.com" },
-  { icon: Linkedin, label: "LinkedIn", value: "piyush-kumar-b15839257", href: "https://www.linkedin.com/in/piyush-kumar-b15839257/" },
-  { icon: Github, label: "GitHub", value: "piyushkumar-prog", href: "https://github.com/piyushkumar-prog" },
+  { icon: Linkedin, label: "LinkedIn", value: "piyushkumar-ai", href: "https://www.linkedin.com/in/piyushkumar-ai/" },
+  { icon: Github, label: "GitHub", value: "Piyush-Karn", href: "https://github.com/Piyush-Karn" },
   { icon: Globe, label: "Portfolio", value: "aiwithpiyush.netlify.app", href: "https://aiwithpiyush.netlify.app" },
 ];
 

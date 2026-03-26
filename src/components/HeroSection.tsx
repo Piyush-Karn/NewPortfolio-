@@ -11,8 +11,8 @@ const stats = [
 ];
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/piyushkumar-prog", label: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/piyush-kumar-b15839257/", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/Piyush-Karn", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/piyushkumar-ai/", label: "LinkedIn" },
   { icon: Mail, href: "mailto:piyushkumar97430@gmail.com", label: "Email" },
 ];
 
@@ -234,7 +234,8 @@ const HeroSection = () => {
 
           <motion.a
             href="https://aiwithpiyush.netlify.app/Resume/Piyush_Kumar_Resume.pdf"
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="group flex items-center gap-3 px-8 py-4 rounded-full border border-border hover:border-primary/50 transition-all text-sm font-medium"

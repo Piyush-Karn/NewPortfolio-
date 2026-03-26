@@ -13,8 +13,8 @@ const projects = [
     tags: ["YOLOv8", "OpenCV", "TensorRT", "Python"],
     highlights: ["60+ FPS real-time inference", "Multi-camera feed processing", "Edge-optimized deployment", "Custom-trained on space station datasets"],
     gradient: "from-primary/20 to-accent/10",
-    github: "#",
-    live: "#",
+    github: "https://github.com/Piyush-Karn/Visionx",
+    live: "https://drive.google.com/file/d/1rEJLyOR0bcBAR9EdYqOND9v9tzY8BO5y/view",
     year: "2024",
   },
   {
@@ -26,8 +26,8 @@ const projects = [
     tags: ["NLP", "OCR", "Flask", "Machine Learning"],
     highlights: ["Semantic job matching algorithm", "OCR for scanned documents", "ATS compatibility scoring", "Real-time improvement suggestions"],
     gradient: "from-accent/20 to-primary/10",
-    github: "#",
-    live: "#",
+    github: "https://github.com/Piyush-Karn/resumesnap",
+    live: "https://resumesnap.vercel.app/",
     year: "2024",
   },
   {
@@ -39,8 +39,8 @@ const projects = [
     tags: ["Scikit-learn", "Streamlit", "Python", "ML"],
     highlights: ["TF-IDF feature extraction", "Cosine similarity matching", "5000+ movie database", "Interactive exploration UI"],
     gradient: "from-primary/15 via-accent/10 to-transparent",
-    github: "#",
-    live: "#",
+    github: "https://github.com/Piyush-Karn/Movie-Recommendation-System",
+    live: "https://smartpicks-movie-recommender.streamlit.app/",
     year: "2023",
   },
 ];
@@ -96,10 +96,10 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
               ))}
             </div>
             <div className="flex gap-3">
-              <a href={project.github} className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm text-foreground/80 hover:border-primary/50 hover:text-foreground transition-all" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm text-foreground/80 hover:border-primary/50 hover:text-foreground transition-all" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                 <Github className="w-4 h-4" /> Source
               </a>
-              <a href={project.live} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/30 text-sm text-primary hover:bg-primary/20 transition-all" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+              <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/30 text-sm text-primary hover:bg-primary/20 transition-all" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                 <ExternalLink className="w-4 h-4" /> Live Demo
               </a>
             </div>
