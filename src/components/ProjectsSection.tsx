@@ -43,6 +43,19 @@ const projects = [
     live: "https://smartpicks-movie-recommender.streamlit.app/",
     year: "2023",
   },
+  {
+    num: "04",
+    title: "VoiceGuard",
+    subtitle: "AI-Powered Domestic Violence Detection",
+    description: "Privacy-first AI system for real-time domestic violence detection and legal empowerment. Features stealth intervention and RAG-powered legal assistance.",
+    longDescription: "VoiceGuard is a privacy-first, AI-powered system designed to detect and intervene in domestic violence instances. It continuously analyzes real-time audio feeds to identify patterns of distress, aggression, and violence without compromising user privacy. Built for stealth and immediate action, the system features automated emergency SOS alerts, secure encrypted evidence logging, and a RAG-powered legal AI chatbot to empower users with accurate Indian legal context and automated FIR drafting.",
+    tags: ["FastAPI", "OpenAI Whisper", "Llama 3.3", "ChromaDB"],
+    highlights: ["Real-time silent audio threat detection", "RAG-powered legal AI guidance", "Instant SOS & secure evidence locker", "Stealth mode with multilingual support"],
+    gradient: "from-accent/20 via-primary/15 to-accent/10",
+    github: "https://github.com/Piyush-Karn/voiceguard",
+    live: "https://www.youtube.com/watch?v=fml2F7navW4",
+    year: "2024",
+  },
 ];
 
 type Project = typeof projects[number];
