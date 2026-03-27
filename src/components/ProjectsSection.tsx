@@ -14,7 +14,7 @@ const projects = [
     highlights: ["60+ FPS real-time inference", "Multi-camera feed processing", "Edge-optimized deployment", "Custom-trained on space station datasets"],
     gradient: "from-primary/20 to-accent/10",
     github: "https://github.com/Piyush-Karn/Visionx",
-    live: "https://huggingface.co/spaces/PiyushKarn/VisionX",
+    live: "https://piyushkarn-visionx.hf.space/",
     year: "2024",
   },
   {
@@ -53,7 +53,7 @@ const projects = [
     highlights: ["Real-time silent audio threat detection", "RAG-powered legal AI guidance", "Instant SOS & secure evidence locker", "Stealth mode with multilingual support"],
     gradient: "from-accent/20 via-primary/15 to-accent/10",
     github: "https://github.com/Piyush-Karn/voiceguard",
-    live: "https://www.youtube.com/watch?v=fml2F7navW4",
+    live: "https://piyushkarn-voiceguard-new.hf.space/",
     year: "2024",
   },
 ];
