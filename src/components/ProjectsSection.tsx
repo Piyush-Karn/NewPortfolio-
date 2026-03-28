@@ -27,7 +27,7 @@ const projects = [
     highlights: ["Semantic job matching algorithm", "OCR for scanned documents", "ATS compatibility scoring", "Real-time improvement suggestions"],
     gradient: "from-accent/20 to-primary/10",
     github: "https://github.com/Piyush-Karn/resumesnap",
-    live: "https://resumesnap.vercel.app/",
+    live: "https://piyushkarn-resumesnap.hf.space/",
     year: "2024",
   },
   {
