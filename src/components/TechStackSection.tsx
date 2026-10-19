@@ -3,32 +3,19 @@ import { useRef, useState } from "react";
 import { Sparkles, Terminal, Database, Cpu, Wrench } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const techCategories = [
-  {
-    label: "AI / ML",
-    icon: Cpu,
-    description: "Building intelligent systems & AI solutions",
-    items: ["TensorFlow", "PyTorch", "YOLOv8", "OpenCV", "Scikit-learn", "Keras", "TensorRT", "Deep Learning"],
-  },
-  {
-    label: "Data Science",
-    icon: Database,
-    description: "Processing & analyzing complex datasets",
-    items: ["NumPy", "Pandas", "NLP", "Computer Vision", "Data Analysis", "Feature Engineering"],
-  },
-  {
-    label: "Development",
-    icon: Terminal,
-    description: "Modern development & scalable applications",
-    items: ["Python", "Flask", "Streamlit", "HTML/CSS", "Bootstrap", "REST APIs", "SQL"],
-  },
-  {
-    label: "DevOps & Tools",
-    icon: Wrench,
-    description: "Infrastructure & deployment pipelines",
-    items: ["Git", "Docker", "Linux", "VS Code", "Jupyter"],
-  },
-];
+import { skills } from "@/data/portfolio";
+
+const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  backend: Database,
+  ai: Cpu,
+  languages: Terminal,
+  tools: Wrench,
+};
+
+const techCategories = skills.map((cat) => ({
+  ...cat,
+  icon: categoryIcons[cat.id] || Terminal,
+}));
 
 const TechStackSection = () => {
   const isMobile = useIsMobile();

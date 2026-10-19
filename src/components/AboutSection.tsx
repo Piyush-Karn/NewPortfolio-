@@ -1,24 +1,18 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Brain, Trophy, Target, Sparkles, Code2, Cpu, GraduationCap, MapPin } from "lucide-react";
-
-const stats = [
-  { icon: Brain, label: "AI/ML Focus", value: "2+", unit: "Years" },
-  { icon: Trophy, label: "Hackathon", value: "1st", unit: "Place" },
-  { icon: Target, label: "Model Accuracy", value: "95", unit: "%+" },
-];
-
-const interests = [
-  { icon: Cpu, text: "Deep Learning" },
-  { icon: Code2, text: "Full-Stack Dev" },
-  { icon: Brain, text: "Computer Vision" },
-  { icon: Target, text: "NLP Systems" },
-];
+import { Sparkles, GraduationCap, MapPin, Briefcase, Zap, Target, Cpu } from "lucide-react";
+import { profile, education, experience, impact, projects } from "@/data/portfolio";
 
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const containerRef = useRef(null);
+
+  const stats = [
+    { icon: Briefcase, label: "Hands-on Experience", value: `${experience.length}`, unit: "Internships" },
+    { icon: Zap, label: impact[0].label, value: impact[0].delta, unit: "" },
+    { icon: Target, label: `${projects[1].title} Detection`, value: projects[1].metrics[0].value, unit: projects[1].metrics[0].label },
+  ];
 
   return (
     <section id="about" className="relative py-32 overflow-hidden" ref={containerRef}>
@@ -69,15 +63,11 @@ const AboutSection = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="space-y-4 max-w-xl"
             >
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                Passionate AI/ML Developer with expertise in building intelligent systems using 
-                deep learning, computer vision, and natural language processing.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Currently pursuing B.Tech in Computer Science at KCCITM, with hands-on experience in 
-                real-time object detection, AI-powered resume analysis, and recommendation systems. 
-                National-level hackathon winner with a drive for solving complex problems through AI.
-              </p>
+              {profile.summary.map((para, i) => (
+                <p key={i} className="text-muted-foreground leading-relaxed text-base md:text-lg">
+                  {para}
+                </p>
+              ))}
             </motion.div>
 
             {/* Info pills */}
@@ -89,11 +79,11 @@ const AboutSection = () => {
             >
               <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm">
                 <GraduationCap className="w-4 h-4 text-primary" />
-                <span className="text-muted-foreground">B.Tech CSE — KCCITM</span>
+                <span className="text-muted-foreground">{education.degree} — KCCITM</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm">
                 <MapPin className="w-4 h-4 text-accent" />
-                <span className="text-muted-foreground">India</span>
+                <span className="text-muted-foreground">{profile.location}</span>
               </div>
             </motion.div>
 
@@ -110,17 +100,17 @@ const AboutSection = () => {
                 Focused On
               </p>
               <div className="flex flex-wrap gap-3">
-                {interests.map((item, i) => (
+                {profile.roles.map((role, i) => (
                   <motion.div
-                    key={item.text}
+                    key={role}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border hover:border-primary/40 bg-secondary/50 transition-all cursor-default"
                   >
-                    <item.icon className="w-3.5 h-3.5 text-primary" />
-                    <span className="text-sm font-medium text-foreground/80">{item.text}</span>
+                    <Cpu className="w-3.5 h-3.5 text-primary" />
+                    <span className="text-sm font-medium text-foreground/80">{role}</span>
                   </motion.div>
                 ))}
               </div>
@@ -149,7 +139,7 @@ const AboutSection = () => {
                       <span className="text-3xl font-bold text-gradient" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                         {stat.value}
                       </span>
-                      <span className="text-lg font-medium text-foreground/60">{stat.unit}</span>
+                      {stat.unit && <span className="text-lg font-medium text-foreground/60">{stat.unit}</span>}
                     </div>
                     <p className="text-xs text-muted-foreground mt-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                       {stat.label}
@@ -168,14 +158,14 @@ const AboutSection = () => {
             >
               <div className="absolute -top-2 -left-1 text-6xl font-bold text-primary/10 leading-none" style={{ fontFamily: "Georgia, serif" }}>"</div>
               <p className="text-sm text-foreground/70 italic leading-relaxed pl-4 relative z-10">
-                I believe the best way to predict the future is to build it — one model, one algorithm, one system at a time.
+                {profile.quote}
               </p>
               <div className="mt-4 flex items-center gap-3 pl-4">
                 <div className="w-8 h-[1px] bg-primary/40" />
                 <span className="text-[10px] tracking-[0.2em] uppercase text-primary/60"
                   style={{ fontFamily: "'JetBrains Mono', monospace" }}
                 >
-                  Piyush Kumar
+                  {profile.name}
                 </span>
               </div>
             </motion.div>

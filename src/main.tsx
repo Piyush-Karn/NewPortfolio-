@@ -6,10 +6,12 @@ import "./index.css";
 const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
 if (!isTouchDevice) {
-  import("@studio-freight/lenis").then(({ default: Lenis }) => {
+  import("lenis").then(({ default: Lenis }) => {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      wheelMultiplier: 0.7,
+      touchMultiplier: 1.5,
       smoothWheel: true,
     });
     function raf(time: number) {

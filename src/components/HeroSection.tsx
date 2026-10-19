@@ -1,19 +1,12 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { Download, ArrowDown, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
-
-const roles = ["AI/ML Engineer", "Software Developer", "Deep Learning Enthusiast", "Computer Vision Specialist"];
-
-const stats = [
-  { label: "Projects", value: "10+" },
-  { label: "Experience", value: "2+ Yrs" },
-  { label: "Technologies", value: "15+" },
-];
+import { profile, heroStats } from "@/data/portfolio";
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/Piyush-Karn", label: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/piyushkumar-ai/", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:piyushkumar97430@gmail.com", label: "Email" },
+  { icon: Github, href: profile.github, label: "GitHub" },
+  { icon: Linkedin, href: profile.linkedin, label: "LinkedIn" },
+  { icon: Mail, href: `mailto:${profile.email}`, label: "Email" },
 ];
 
 const HeroSection = () => {
@@ -26,7 +19,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
+      setRoleIndex((prev) => (prev + 1) % profile.roles.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -39,8 +32,8 @@ const HeroSection = () => {
     }),
   };
 
-  const firstName = "PIYUSH";
-  const lastName = "KUMAR";
+  const firstName = profile.firstName;
+  const lastName = profile.lastName;
 
   return (
     <section ref={containerRef} className="relative min-h-[110vh] flex items-center justify-center overflow-hidden">
@@ -186,7 +179,7 @@ const HeroSection = () => {
                     <span className="text-xs md:text-sm font-medium text-primary whitespace-nowrap"
                       style={{ fontFamily: "'JetBrains Mono', monospace" }}
                     >
-                      {roles[roleIndex]}
+                      {profile.roles[roleIndex]}
                     </span>
                   </motion.div>
                 </AnimatePresence>
@@ -197,16 +190,13 @@ const HeroSection = () => {
 
         {/* Brief tagline */}
         <motion.p
-          className="max-w-lg text-muted-foreground text-sm md:text-base leading-relaxed mb-8"
+          className="max-w-xl text-muted-foreground text-sm md:text-base leading-relaxed mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3, duration: 0.8 }}
           style={{ fontFamily: "'Syne', sans-serif" }}
         >
-          Crafting intelligent systems at the intersection of{" "}
-          <span className="text-primary font-medium">machine learning</span>,{" "}
-          <span className="text-accent font-medium">computer vision</span>, and{" "}
-          <span className="font-medium" style={{ color: "hsl(var(--neon))" }}>software engineering</span>.
+          {profile.tagline}
         </motion.p>
 
         {/* CTAs + Stats row */}
@@ -233,7 +223,7 @@ const HeroSection = () => {
           </motion.a>
 
           <motion.a
-            href="/Piyush-Kumar-Resume.pdf"
+            href={profile.resume}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
@@ -246,7 +236,7 @@ const HeroSection = () => {
 
           {/* Stats divider + stats */}
           <div className="hidden md:flex items-center gap-8 ml-6 pl-8 border-l border-border/50">
-            {stats.map((stat, i) => (
+            {heroStats.map((stat, i) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
@@ -255,7 +245,7 @@ const HeroSection = () => {
                 className="text-center"
               >
                 <div className="text-xl md:text-2xl font-bold text-gradient-static" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  {stat.value}
+                  {stat.prefix}{stat.value}{stat.suffix}
                 </div>
                 <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-1"
                   style={{ fontFamily: "'JetBrains Mono', monospace" }}

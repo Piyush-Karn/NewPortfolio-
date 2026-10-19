@@ -1,15 +1,26 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import {
-  Mail, MapPin, Linkedin, Globe, ArrowUpRight, Send, Github,
-  Sparkles, Clock, Coffee, Heart, Zap, Copy, Check,
+  Mail,
+  MapPin,
+  Linkedin,
+  Globe,
+  ArrowUpRight,
+  Send,
+  Github,
+  Sparkles,
+  Heart,
+  Zap,
+  Copy,
+  Check,
 } from "lucide-react";
+import { profile } from "@/data/portfolio";
 
 const links = [
-  { icon: Mail, label: "Email", value: "piyushkumar97430@gmail.com", href: "mailto:piyushkumar97430@gmail.com" },
-  { icon: Linkedin, label: "LinkedIn", value: "piyushkumar-ai", href: "https://www.linkedin.com/in/piyushkumar-ai/" },
-  { icon: Github, label: "GitHub", value: "Piyush-Karn", href: "https://github.com/Piyush-Karn" },
-  { icon: Globe, label: "Portfolio", value: "aiwithpiyush.netlify.app", href: "https://aiwithpiyush.netlify.app" },
+  { icon: Mail, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+  { icon: Linkedin, label: "LinkedIn", value: profile.linkedinHandle, href: profile.linkedin },
+  { icon: Github, label: "GitHub", value: profile.githubHandle, href: profile.github },
+  { icon: Globe, label: "Portfolio", value: profile.portfolio.replace(/^https?:\/\//, ""), href: profile.portfolio },
 ];
 
 const ContactSection = () => {
@@ -18,9 +29,8 @@ const ContactSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [copied, setCopied] = useState(false);
 
-
   const copyEmail = () => {
-    navigator.clipboard.writeText("piyushkarn96@gmail.com");
+    navigator.clipboard.writeText(profile.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -61,7 +71,7 @@ const ContactSection = () => {
           <span className="flex-1 h-[1px] bg-border max-w-[200px]" />
         </motion.div>
 
-        {/* Massive headline */}
+        {/* Headline */}
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -80,7 +90,7 @@ const ContactSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg md:text-xl text-muted-foreground max-w-xl mb-16 leading-relaxed"
         >
-          Whether it's AI research, a startup idea, or a collaboration—I'd love to hear from you.
+          Whether it's production systems, backend infrastructure, or AI architecture — I'd love to hear from you.
         </motion.p>
 
         {/* Email highlight card — the main CTA */}
@@ -109,7 +119,7 @@ const ContactSection = () => {
                   className="text-2xl md:text-3xl font-bold tracking-tight group-hover:text-primary transition-colors duration-300"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  piyushkarn96@gmail.com
+                  {profile.email}
                 </p>
               </div>
             </div>
@@ -127,7 +137,7 @@ const ContactSection = () => {
               </motion.button>
 
               <motion.a
-                href="mailto:piyushkumar97430@gmail.com"
+                href={`mailto:${profile.email}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="group/btn relative flex items-center gap-2 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm overflow-hidden"
@@ -142,17 +152,17 @@ const ContactSection = () => {
           </div>
         </motion.div>
 
-        {/* Three-column bento grid */}
+        {/* Bento grid */}
         <div className="grid md:grid-cols-3 gap-4 mb-12">
-          {/* Location card */}
+          {/* Location & Availability card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="relative p-7 rounded-2xl glass-card overflow-hidden group md:row-span-2"
+            className="relative p-7 rounded-2xl glass-card overflow-hidden group md:row-span-2 flex flex-col justify-between"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative z-10 h-full flex flex-col">
+            <div className="relative z-10">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5">
                 <MapPin className="w-6 h-6 text-primary" />
               </div>
@@ -162,33 +172,18 @@ const ContactSection = () => {
               >
                 Location
               </p>
-              <p className="text-xl font-bold mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                Noida, India
+              <p className="text-xl font-bold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                {profile.location}
               </p>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                Open to remote & hybrid roles worldwide
-              </p>
+            </div>
 
-              {/* Availability status */}
-              <div className="mt-auto space-y-3 pt-4 border-t border-border/50">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  <span className="text-xs text-muted-foreground" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                    Available for work
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Coffee className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                    Freelance projects welcome
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                    Reply within 24h
-                  </span>
-                </div>
+            {/* Availability status */}
+            <div className="relative z-10 mt-auto pt-4 border-t border-border/50">
+              <div className="flex items-start gap-2.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shrink-0 mt-1" />
+                <span className="text-xs text-muted-foreground leading-relaxed" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  {profile.availability}
+                </span>
               </div>
             </div>
           </motion.div>
@@ -228,7 +223,7 @@ const ContactSection = () => {
           ))}
         </div>
 
-        {/* Marquee strip — adds energy */}
+        {/* Marquee strip */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -236,21 +231,19 @@ const ContactSection = () => {
           className="overflow-hidden rounded-2xl glass-card py-4 mb-16"
         >
           <div className="flex whitespace-nowrap" style={{ animation: "marquee 30s linear infinite" }}>
-            {Array(3).fill(null).map((_, idx) => (
+            {Array(4).fill(null).map((_, idx) => (
               <span key={idx} className="flex items-center gap-6 mr-6">
-                {["AI/ML Engineer", "Open Source", "Deep Learning", "Computer Vision", "Collaboration", "Innovation"].map(
-                  (word) => (
-                    <span key={`${idx}-${word}`} className="flex items-center gap-2">
-                      <Zap className="w-3 h-3 text-primary/50" />
-                      <span
-                        className="text-sm text-muted-foreground/50 tracking-wider uppercase"
-                        style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                      >
-                        {word}
-                      </span>
+                {profile.roles.map((role) => (
+                  <span key={`${idx}-${role}`} className="flex items-center gap-2">
+                    <Zap className="w-3 h-3 text-primary/50" />
+                    <span
+                      className="text-sm text-muted-foreground/50 tracking-wider uppercase"
+                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                    >
+                      {role}
                     </span>
-                  )
-                )}
+                  </span>
+                ))}
               </span>
             ))}
           </div>
@@ -266,7 +259,7 @@ const ContactSection = () => {
       >
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 md:px-12">
           <p className="text-sm text-muted-foreground flex items-center gap-1.5">
-            © 2026 Piyush Kumar. Built with <Heart className="w-3.5 h-3.5 text-accent inline" /> & code
+            © 2026 {profile.name}. Built with <Heart className="w-3.5 h-3.5 text-accent inline" /> & code
           </p>
           <div className="flex items-center gap-6">
             {links.map((link) => (
@@ -276,6 +269,7 @@ const ContactSection = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground/50 hover:text-primary transition-colors"
+                title={link.label}
               >
                 <link.icon className="w-4 h-4" />
               </a>
@@ -289,7 +283,7 @@ const ContactSection = () => {
             className="text-[9px] tracking-[0.3em] uppercase text-muted-foreground/30"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
-            Designed & Developed by Piyush
+            Designed & Developed by {profile.name}
           </span>
           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
         </div>

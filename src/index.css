@@ -158,11 +158,6 @@
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
-  /* Use content-visibility for offscreen sections */
-  section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 800px;
-  }
 
   .line-clamp-3 {
     display: -webkit-box;

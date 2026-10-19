@@ -2,8 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
-
-const navItems = ["About", "Skills", "Experience", "Projects", "Contact"];
+import { sections } from "@/data/portfolio";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -52,7 +51,7 @@ const Navbar = () => {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item, i) => (
+            {sections.map((item, i) => (
               <motion.button
                 key={item}
                 initial={{ opacity: 0, y: -20 }}
@@ -133,7 +132,7 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center gap-6"
           >
-            {navItems.map((item, i) => (
+            {sections.map((item, i) => (
               <motion.button
                 key={item}
                 initial={{ opacity: 0, y: 30 }}
