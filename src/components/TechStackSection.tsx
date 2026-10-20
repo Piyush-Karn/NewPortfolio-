@@ -134,7 +134,7 @@ const TechStackSection = () => {
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
         <motion.div
           className="absolute top-16 whitespace-nowrap pointer-events-none select-none"
-          style={{ x: bgX }}
+          style={{ x: bgX, willChange: "transform" }}
         >
           <span className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-30" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             TOOLS & SKILLS

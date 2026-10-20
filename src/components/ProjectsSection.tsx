@@ -184,7 +184,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
 
 const ArchiveRow = () => {
   return (
-    <div data-pik-section="morework" className="max-w-6xl mx-auto px-6 py-16">
+    <div data-pik-section="morework" className="cv-auto max-w-6xl mx-auto px-6 py-16">
       <div className="flex items-center gap-3 mb-8">
         <span
           className="text-xs tracking-[0.3em] uppercase text-primary font-medium"
@@ -399,7 +399,7 @@ const DesktopProjectsSection = () => {
           <div className="sticky top-0 h-screen overflow-hidden">
             <motion.div
               className="absolute top-20 right-0 whitespace-nowrap pointer-events-none select-none z-0"
-              style={{ x: bgX }}
+              style={{ x: bgX, willChange: "transform" }}
             >
               <span
                 className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-20"
@@ -447,7 +447,7 @@ const DesktopProjectsSection = () => {
               </div>
             </div>
 
-            <motion.div className="flex items-center h-full pt-24" style={{ x }}>
+            <motion.div className="flex items-center h-full pt-24" style={{ x, willChange: "transform" }}>
               {projects.map((project, i) => (
                 <div
                   key={project.title}

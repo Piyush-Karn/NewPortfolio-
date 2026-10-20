@@ -8,7 +8,7 @@ const AchievementsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="impact" data-pik-section="impact" className="relative py-32 px-6 md:px-12 overflow-hidden" ref={ref}>
+    <section id="impact" data-pik-section="impact" className="cv-auto relative py-32 px-6 md:px-12 overflow-hidden" ref={ref}>
       {/* Background text — hidden on mobile */}
       <div className="hidden md:block absolute top-16 whitespace-nowrap pointer-events-none select-none">
         <span

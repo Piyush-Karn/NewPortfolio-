@@ -49,7 +49,7 @@ const HeroSection = () => {
       {/* Large background text */}
       <motion.div
         className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none select-none"
-        style={{ x: bgTextX, opacity: 0.03, fontFamily: "'Space Grotesk', sans-serif" }}
+        style={{ x: bgTextX, opacity: 0.03, fontFamily: "'Space Grotesk', sans-serif", willChange: "transform" }}
       >
         <span className="text-[20vw] font-bold tracking-[-0.05em] text-foreground">
           ENGINEER • CREATOR • BUILDER
@@ -59,7 +59,7 @@ const HeroSection = () => {
       {/* Floating orbs — hidden on mobile for performance */}
       <motion.div
         className="hidden md:block absolute w-[500px] h-[500px] rounded-full blur-[80px]"
-        style={{ background: "hsl(var(--primary) / 0.15)", top: "10%", right: "5%", y: nameY }}
+        style={{ background: "hsl(var(--primary) / 0.15)", top: "10%", right: "5%", y: nameY, willChange: "transform" }}
       />
       <div
         className="hidden md:block absolute w-[300px] h-[300px] rounded-full blur-[60px]"
@@ -109,7 +109,7 @@ const HeroSection = () => {
         <div className="w-[1px] h-16 bg-gradient-to-b from-primary/30 to-transparent" />
       </motion.div>
 
-      <motion.div className="relative z-10 w-full px-6 md:px-12 lg:px-24" style={{ y: nameY, opacity }}>
+      <motion.div className="relative z-10 w-full px-6 md:px-12 lg:px-24" style={{ y: nameY, opacity, willChange: "transform, opacity" }}>
         {/* Greeting */}
         <motion.div
           className="mb-6"
@@ -268,7 +268,7 @@ const HeroSection = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 2, duration: 0.6 }}
       >
-        <div style={{ animation: "spin 20s linear infinite" }}>
+        <div data-anim-loop style={{ animation: "spin 20s linear infinite", willChange: "transform" }}>
           <svg width="120" height="120" viewBox="0 0 100 100" className="text-muted-foreground/20">
             <path id="textCircle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
             <text fontSize="10" fill="currentColor" style={{ fontFamily: "'JetBrains Mono', monospace" }}>

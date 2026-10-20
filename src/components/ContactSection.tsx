@@ -36,7 +36,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" data-pik-section="contact" className="relative py-32 px-6 md:px-12 overflow-hidden" ref={containerRef}>
+    <section id="contact" data-pik-section="contact" className="cv-auto relative py-32 px-6 md:px-12 overflow-hidden" ref={containerRef}>
       {/* Background parallax text — hidden on mobile */}
       <div className="hidden md:block absolute top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none select-none">
         <span
@@ -235,7 +235,7 @@ const ContactSection = () => {
           transition={{ delay: 0.8 }}
           className="overflow-hidden rounded-2xl glass-card py-4 mb-16"
         >
-          <div className="flex whitespace-nowrap" style={{ animation: "marquee 30s linear infinite" }}>
+          <div data-anim-loop className="flex whitespace-nowrap" style={{ animation: "marquee 30s linear infinite" }}>
             {Array(4).fill(null).map((_, idx) => (
               <span key={idx} className="flex items-center gap-6 mr-6">
                 {profile.roles.map((role) => (

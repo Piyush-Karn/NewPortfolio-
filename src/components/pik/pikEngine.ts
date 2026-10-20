@@ -90,7 +90,7 @@ export class PikEngine {
   private eu = new THREE.Euler();
 
   constructor(canvas: HTMLCanvasElement, size: number) {
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "low-power" });
+    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: window.devicePixelRatio < 1.5, alpha: true, powerPreference: "low-power" });
     this.renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
     this.renderer.setSize(size, size, false);
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;

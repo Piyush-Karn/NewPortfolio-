@@ -17,7 +17,7 @@ const ExperienceSection = () => {
   const containerRef = useRef(null);
 
   return (
-    <section id="experience" data-pik-section="experience" className="relative py-32 overflow-hidden" ref={containerRef}>
+    <section id="experience" data-pik-section="experience" className="cv-auto relative py-32 overflow-hidden" ref={containerRef}>
       {/* Background text — hidden on mobile */}
       <div className="hidden md:block absolute top-16 whitespace-nowrap pointer-events-none select-none">
         <span className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-30" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>

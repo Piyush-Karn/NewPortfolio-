@@ -360,8 +360,17 @@ export class PikBrain {
     });
     scan();
     // Sections are lazy-loaded, so watch for new ones.
-    this.mo = new MutationObserver(scan);
-    this.mo.observe(document.body, { childList: true, subtree: true });
+    let pending = 0;
+    this.mo = new MutationObserver((muts) => {
+      if (muts.every((m) => this.root.contains(m.target) || this.curtain.contains(m.target))) return;
+      if (pending) return;
+      pending = requestAnimationFrame(() => {
+        pending = 0;
+        scan();
+        if (document.querySelectorAll("[data-pik-section]").length >= 8) this.mo?.disconnect();
+      });
+    });
+    this.mo.observe(document.getElementById("root") || document.body, { childList: true, subtree: true });
   }
 
   private onMove = (e: PointerEvent) => {

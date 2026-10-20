@@ -15,7 +15,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" data-pik-section="about" className="relative py-32 overflow-hidden" ref={containerRef}>
+    <section id="about" data-pik-section="about" className="cv-auto relative py-32 overflow-hidden" ref={containerRef}>
       {/* Large background text — hidden on mobile */}
       <div className="hidden md:block absolute top-20 whitespace-nowrap pointer-events-none select-none">
         <span className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-30"
