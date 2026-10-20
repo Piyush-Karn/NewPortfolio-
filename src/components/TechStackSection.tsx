@@ -180,7 +180,7 @@ const TechStackSection = () => {
                     transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
                     onClick={() => setActiveCategory(i)}
                     className={`w-full group flex items-center gap-4 p-4 rounded-2xl text-left transition-all duration-400 border ${
-                      isActive ? "glass-card border-primary/30 bg-primary/5" : "border-transparent hover:border-border hover:bg-secondary/30"
+                      isActive ? "glass-solid border-primary/30 bg-primary/5" : "border-transparent hover:border-border hover:bg-secondary/30"
                     }`}
                   >
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${isActive ? "bg-primary/20" : "bg-secondary/60 group-hover:bg-secondary"}`}>
@@ -230,7 +230,7 @@ const TechStackSection = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.06, duration: 0.4, type: "spring" }}
                     whileHover={{ scale: 1.06, y: -4 }}
-                    className="group relative p-5 rounded-2xl glass-card hover:border-primary/40 cursor-default transition-all duration-300 overflow-hidden text-center"
+                    className="group relative p-5 rounded-2xl glass-solid hover:border-primary/40 cursor-default transition-all duration-300 overflow-hidden text-center"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="relative z-10 text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors" style={{ fontFamily: "'JetBrains Mono', monospace" }}>

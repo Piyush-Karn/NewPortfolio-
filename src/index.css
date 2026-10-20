@@ -113,7 +113,8 @@
   }
   .noise-overlay::before {
     content: '';
-    position: absolute;
+    position: fixed;
+    will-change: transform;
     inset: 0;
     opacity: 0.03;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -139,6 +140,13 @@
     background: hsl(var(--card) / 0.6);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  /* Looks the same as .glass-card over a dark, near-flat background, but without a live blur.
+     Used only where the content behind the card moves every scroll frame (Skills, Projects). */
+  .glass-solid {
+    background: color-mix(in srgb, hsl(var(--card)) 60%, hsl(var(--background)));
     border: 1px solid hsl(var(--border) / 0.5);
   }
 

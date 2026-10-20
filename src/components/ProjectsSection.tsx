@@ -456,7 +456,7 @@ const DesktopProjectsSection = () => {
                   <motion.div
                     data-pik-hover={`project:${project.slug}`}
                     data-pik-title={project.title}
-                    className="group relative w-full max-w-5xl rounded-3xl overflow-hidden glass-card hover:border-primary/30 transition-all cursor-pointer"
+                    className="group relative w-full max-w-5xl rounded-3xl overflow-hidden glass-solid hover:border-primary/30 transition-all cursor-pointer"
                     whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     onClick={() => setSelectedProject(project)}
