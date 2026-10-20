@@ -8,7 +8,7 @@ const AchievementsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="impact" className="relative py-32 px-6 md:px-12 overflow-hidden" ref={ref}>
+    <section id="impact" data-pik-section="impact" className="relative py-32 px-6 md:px-12 overflow-hidden" ref={ref}>
       {/* Background text — hidden on mobile */}
       <div className="hidden md:block absolute top-16 whitespace-nowrap pointer-events-none select-none">
         <span
@@ -61,6 +61,8 @@ const AchievementsSection = () => {
           {impact.map((item, i) => (
             <motion.div
               key={item.label}
+              data-pik-hover={`impact:${i}`}
+              data-pik-anchor={i === 0 ? "impact-card" : undefined}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}
@@ -145,6 +147,7 @@ const AchievementsSection = () => {
               {achievements.map((ach, i) => (
                 <motion.div
                   key={ach.title}
+                  data-pik-hover="achievement"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: 0.6 + i * 0.1, duration: 0.7 }}

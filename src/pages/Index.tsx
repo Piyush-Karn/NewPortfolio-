@@ -11,6 +11,7 @@ const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
 const AchievementsSection = lazy(() => import("@/components/AchievementsSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
+const PikMascot = lazy(() => import("@/components/pik/PikMascot"));
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -39,6 +40,7 @@ const Index = () => {
               <AchievementsSection />
               <ContactSection />
             </Suspense>
+            <Suspense fallback={null}><PikMascot /></Suspense>
           </motion.div>
         )}
       </AnimatePresence>

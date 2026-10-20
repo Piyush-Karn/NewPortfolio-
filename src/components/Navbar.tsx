@@ -20,7 +20,8 @@ const Navbar = () => {
 
   const scrollTo = (id: string) => {
     setMenuOpen(false);
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+    const ev = new CustomEvent("pik:navigate", { detail: { id: id.toLowerCase(), label: id }, cancelable: true });
+    if (window.dispatchEvent(ev)) document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -45,7 +46,7 @@ const Navbar = () => {
           >
             <span className="text-xl font-bold tracking-tighter" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               <span className="text-gradient">PK</span>
-              <span className="text-foreground/40">.</span>
+              <span className="text-foreground/40" data-pik="logo-dot">.</span>
             </span>
           </motion.button>
 
@@ -83,6 +84,8 @@ const Navbar = () => {
                 className="w-9 h-9 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                data-pik-hover="theme"
+                data-pik-click="theme"
               >
                 {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </motion.button>
@@ -94,6 +97,7 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
               whileHover={{ scale: 1.05 }}
+              data-pik-hover="hire"
               className="text-xs px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all"
               style={{ fontFamily: "'JetBrains Mono', monospace" }}
             >
@@ -108,6 +112,8 @@ const Navbar = () => {
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="w-10 h-10 flex items-center justify-center rounded-full glass-card"
                 whileTap={{ scale: 0.9 }}
+                data-pik-hover="theme"
+                data-pik-click="theme"
               >
                 {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </motion.button>

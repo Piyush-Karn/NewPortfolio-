@@ -1,5 +1,5 @@
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Sparkles, Terminal, Database, Cpu, Wrench } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -23,6 +23,23 @@ const TechStackSection = () => {
   const innerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(innerRef, { once: true, margin: "-100px" });
   const [activeCategory, setActiveCategory] = useState(0);
+  const manualUntil = useRef(0);
+
+  // Tell Pik which category is showing.
+  useEffect(() => {
+    const cat = techCategories[activeCategory];
+    window.dispatchEvent(new CustomEvent("pik:skills-change", { detail: { index: activeCategory, id: cat.id, label: cat.label } }));
+  }, [activeCategory]);
+
+  // Pik pushes the next category in; scroll mapping pauses briefly so it doesn't snap back.
+  useEffect(() => {
+    const next = () => {
+      manualUntil.current = performance.now() + 3000;
+      setActiveCategory((i) => (i + 1) % techCategories.length);
+    };
+    window.addEventListener("pik:skills-next", next);
+    return () => window.removeEventListener("pik:skills-next", next);
+  }, []);
 
   // Only use scroll-driven logic on desktop
   const { scrollYProgress } = useScroll({
@@ -33,6 +50,7 @@ const TechStackSection = () => {
   const bgX = useTransform(scrollYProgress, [0, 1], ["-10%", "15%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (performance.now() < manualUntil.current) return;
     if (isMobile) return; // Skip on mobile
     const usable = Math.max(0, Math.min(1, (latest - 0.05) / 0.85));
     const index = Math.min(techCategories.length - 1, Math.floor(usable * techCategories.length));
@@ -42,7 +60,7 @@ const TechStackSection = () => {
   // Mobile: simple vertical layout
   if (isMobile) {
     return (
-      <section id="skills" className="relative py-20 px-6">
+      <section id="skills" data-pik-section="skills" className="relative py-20 px-6">
         <div ref={innerRef}>
           {/* Header */}
           <motion.div
@@ -93,6 +111,7 @@ const TechStackSection = () => {
                     {cat.items.map((tech) => (
                       <span
                         key={tech}
+                        data-pik-hover={`skill:${tech}`}
                         className="px-3 py-1.5 text-xs rounded-xl bg-secondary/60 border border-border text-foreground/80"
                         style={{ fontFamily: "'JetBrains Mono', monospace" }}
                       >
@@ -111,7 +130,7 @@ const TechStackSection = () => {
 
   // Desktop: original sticky scroll-driven layout
   return (
-    <section id="skills" ref={containerRef} className="relative" style={{ height: `${100 + techCategories.length * 60}vh` }}>
+    <section id="skills" data-pik-section="skills" ref={containerRef} className="relative" style={{ height: `${100 + techCategories.length * 60}vh` }}>
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
         <motion.div
           className="absolute top-16 whitespace-nowrap pointer-events-none select-none"
@@ -154,6 +173,8 @@ const TechStackSection = () => {
                 return (
                   <motion.button
                     key={cat.label}
+                    data-pik-hover={`skillcat:${cat.id}`}
+                    data-pik-title={cat.label}
                     initial={{ opacity: 0, x: -30 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
@@ -195,6 +216,7 @@ const TechStackSection = () => {
 
               <motion.div
                 key={activeCategory}
+                data-pik-anchor="skills-grid"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
@@ -203,6 +225,7 @@ const TechStackSection = () => {
                 {techCategories[activeCategory].items.map((tech, i) => (
                   <motion.div
                     key={tech}
+                    data-pik-hover={`skill:${tech}`}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.06, duration: 0.4, type: "spring" }}

@@ -15,7 +15,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="relative py-32 overflow-hidden" ref={containerRef}>
+    <section id="about" data-pik-section="about" className="relative py-32 overflow-hidden" ref={containerRef}>
       {/* Large background text — hidden on mobile */}
       <div className="hidden md:block absolute top-20 whitespace-nowrap pointer-events-none select-none">
         <span className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-30"
@@ -103,6 +103,7 @@ const AboutSection = () => {
                 {profile.roles.map((role, i) => (
                   <motion.div
                     key={role}
+                    data-pik-hover={`role:${role}`}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
@@ -118,11 +119,13 @@ const AboutSection = () => {
           </div>
 
           {/* Right column - stats + visual */}
-          <div className="lg:col-span-5 space-y-5">
+          <div data-pik-anchor="about-stats" className="lg:col-span-5 space-y-5">
             {/* Stats cards */}
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
+                data-pik-hover={`stat:${i}`}
+                data-pik-title={`${stat.value}${stat.unit ? " " + stat.unit : ""}, ${stat.label}`}
                 initial={{ opacity: 0, x: 50 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.5 + i * 0.15, duration: 0.6 }}
@@ -151,6 +154,7 @@ const AboutSection = () => {
 
             {/* Decorative quote card */}
             <motion.div
+              data-pik-hover="quote"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1, duration: 0.7 }}

@@ -17,7 +17,7 @@ const ExperienceSection = () => {
   const containerRef = useRef(null);
 
   return (
-    <section id="experience" className="relative py-32 overflow-hidden" ref={containerRef}>
+    <section id="experience" data-pik-section="experience" className="relative py-32 overflow-hidden" ref={containerRef}>
       {/* Background text — hidden on mobile */}
       <div className="hidden md:block absolute top-16 whitespace-nowrap pointer-events-none select-none">
         <span className="text-[15vw] font-bold tracking-[-0.04em] text-stroke opacity-30" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -46,6 +46,8 @@ const ExperienceSection = () => {
           {experience.map((exp, idx) => (
             <motion.div
               key={`${exp.company}-${exp.period}`}
+              data-pik-hover={`exp:${idx}`}
+              data-pik-anchor={idx === 0 ? "exp-card" : undefined}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4 + idx * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -110,6 +112,7 @@ const ExperienceSection = () => {
                   {exp.tags.map((tag) => (
                     <span
                       key={tag}
+                      data-pik-hover={`tag:${tag}`}
                       className="px-3 py-1 text-xs rounded-full border border-border hover:border-primary/40 text-muted-foreground hover:text-primary transition-all cursor-default"
                       style={{ fontFamily: "'JetBrains Mono', monospace" }}
                     >
@@ -123,6 +126,7 @@ const ExperienceSection = () => {
 
           {/* ===== EDUCATION CARD ===== */}
           <motion.div
+            data-pik-hover="education"
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4 + experience.length * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -182,6 +186,7 @@ const ExperienceSection = () => {
                   {education.coursework.map((course) => (
                     <span
                       key={course}
+                      data-pik-hover={`tag:${course}`}
                       className="px-3 py-1.5 text-xs rounded-xl bg-secondary/60 border border-border text-foreground/80"
                       style={{ fontFamily: "'JetBrains Mono', monospace" }}
                     >

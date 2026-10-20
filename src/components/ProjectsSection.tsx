@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ArrowUpRight, X, Github, ExternalLink, ChevronRight, Award } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { projects, archive } from "@/data/portfolio";
@@ -14,6 +14,11 @@ const projectGradients = [
 ];
 
 const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("pik:modal", { detail: { open: true, slug: project.slug, title: project.title } }));
+    return () => { window.dispatchEvent(new CustomEvent("pik:modal", { detail: { open: false, slug: project.slug, title: project.title } })); };
+  }, [project]);
+
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
@@ -30,6 +35,8 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
         exit={{ opacity: 0 }}
       />
       <motion.div
+        data-lenis-prevent
+        data-pik-anchor="project-modal"
         className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl glass-card border border-border/50"
         initial={{ scale: 0.85, y: 60 }}
         animate={{ scale: 1, y: 0 }}
@@ -136,6 +143,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
               {project.tags.map((tag) => (
                 <span
                   key={tag}
+                  data-pik-hover={`tag:${tag}`}
                   className="px-4 py-1.5 text-xs rounded-full border border-primary/20 text-primary/80"
                   style={{ fontFamily: "'JetBrains Mono', monospace" }}
                 >
@@ -176,7 +184,7 @@ const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => v
 
 const ArchiveRow = () => {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-16">
+    <div data-pik-section="morework" className="max-w-6xl mx-auto px-6 py-16">
       <div className="flex items-center gap-3 mb-8">
         <span
           className="text-xs tracking-[0.3em] uppercase text-primary font-medium"
@@ -188,9 +196,11 @@ const ArchiveRow = () => {
       </div>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-        {archive.map((item) => (
+        {archive.map((item, idx) => (
           <div
             key={item.title}
+            data-pik-hover={`archive:${idx}`}
+            data-pik-title={item.title}
             className="p-6 rounded-2xl glass-card border border-border/50 flex flex-col justify-between hover:border-primary/30 transition-all"
           >
             <div>
@@ -253,7 +263,7 @@ const MobileProjectsSection = () => {
 
   return (
     <>
-      <section id="projects" className="relative py-20 px-6" ref={ref}>
+      <section id="projects" data-pik-section="projects" className="relative py-20 px-6" ref={ref}>
         <div className="flex items-center gap-3 mb-3">
           <span
             className="text-xs tracking-[0.3em] uppercase text-primary font-medium"
@@ -271,6 +281,8 @@ const MobileProjectsSection = () => {
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
+              data-pik-hover={`project:${project.slug}`}
+              data-pik-title={project.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -345,6 +357,7 @@ const MobileProjectsSection = () => {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
+                    data-pik-hover={`tag:${tag}`}
                     className="px-3 py-1 text-xs rounded-full border border-border text-muted-foreground"
                     style={{ fontFamily: "'JetBrains Mono', monospace" }}
                   >
@@ -381,7 +394,7 @@ const DesktopProjectsSection = () => {
 
   return (
     <>
-      <section id="projects" className="relative">
+      <section id="projects" data-pik-section="projects" className="relative">
         <div ref={containerRef} className="relative" style={{ height: `${projects.length * 130}vh` }}>
           <div className="sticky top-0 h-screen overflow-hidden">
             <motion.div
@@ -441,6 +454,8 @@ const DesktopProjectsSection = () => {
                   className="min-w-[100vw] h-full flex items-center justify-center px-6 md:px-20"
                 >
                   <motion.div
+                    data-pik-hover={`project:${project.slug}`}
+                    data-pik-title={project.title}
                     className="group relative w-full max-w-5xl rounded-3xl overflow-hidden glass-card hover:border-primary/30 transition-all cursor-pointer"
                     whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -530,6 +545,7 @@ const DesktopProjectsSection = () => {
                           {project.tags.map((tag) => (
                             <span
                               key={tag}
+                              data-pik-hover={`tag:${tag}`}
                               className="px-3.5 py-1.5 text-xs rounded-full border border-border text-muted-foreground group-hover:border-primary/20 group-hover:text-foreground/70 transition-colors"
                               style={{ fontFamily: "'JetBrains Mono', monospace" }}
                             >

@@ -238,3 +238,6 @@ html.lenis, html.lenis body {
   background: hsl(var(--primary) / 0.3);
   color: hsl(var(--foreground));
 }
+
+/* Pik leaves a faint dot behind when he pops out of the logo */
+[data-pik-out] { opacity: 0.15; transition: opacity 0.4s ease; }

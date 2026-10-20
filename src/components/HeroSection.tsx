@@ -36,7 +36,7 @@ const HeroSection = () => {
   const lastName = profile.lastName;
 
   return (
-    <section ref={containerRef} className="relative min-h-[110vh] flex items-center justify-center overflow-hidden">
+    <section ref={containerRef} data-pik-section="hero" className="relative min-h-[110vh] flex items-center justify-center overflow-hidden">
       {/* Grid overlay */}
       <div className="absolute inset-0 opacity-[0.04]" style={{
         backgroundImage: `
@@ -95,6 +95,7 @@ const HeroSection = () => {
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
+            data-pik-hover={social.label.toLowerCase()}
             whileHover={{ scale: 1.2, y: -2 }}
             whileTap={{ scale: 0.9 }}
             className="w-10 h-10 rounded-full border border-border hover:border-primary/50 flex items-center justify-center text-muted-foreground hover:text-primary transition-all"
@@ -211,6 +212,7 @@ const HeroSection = () => {
             onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
             whileHover={{ scale: 1.05, boxShadow: "0 0 40px hsl(var(--primary) / 0.3)" }}
             whileTap={{ scale: 0.95 }}
+            data-pik-hover="contact"
             className="group relative px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-sm overflow-hidden"
           >
             <span className="relative z-10">Get in Touch</span>
@@ -228,6 +230,8 @@ const HeroSection = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            data-pik-hover="resume"
+            data-pik-click="resume"
             className="group flex items-center gap-3 px-8 py-4 rounded-full border border-border hover:border-primary/50 transition-all text-sm font-medium"
           >
             <Download className="w-4 h-4 text-primary group-hover:animate-bounce" />

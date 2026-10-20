@@ -36,7 +36,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-32 px-6 md:px-12 overflow-hidden" ref={containerRef}>
+    <section id="contact" data-pik-section="contact" className="relative py-32 px-6 md:px-12 overflow-hidden" ref={containerRef}>
       {/* Background parallax text — hidden on mobile */}
       <div className="hidden md:block absolute top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none select-none">
         <span
@@ -129,6 +129,8 @@ const ContactSection = () => {
                 onClick={copyEmail}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                data-pik-hover="copy"
+                data-pik-click="copy"
                 className="flex items-center gap-2 px-6 py-3 rounded-full border border-border hover:border-primary/50 text-sm font-medium transition-all"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
@@ -140,6 +142,8 @@ const ContactSection = () => {
                 href={`mailto:${profile.email}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                data-pik-hover="email"
+                data-pik-click="email"
                 className="group/btn relative flex items-center gap-2 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -195,6 +199,7 @@ const ContactSection = () => {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
+              data-pik-hover={link.label.toLowerCase()}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
@@ -277,7 +282,7 @@ const ContactSection = () => {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-3 px-6 md:px-12 pb-8">
+        <div className="mt-8 flex items-center justify-center gap-3 px-6 md:px-12">
           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
           <span
             className="text-[9px] tracking-[0.3em] uppercase text-muted-foreground/30"
@@ -286,6 +291,14 @@ const ContactSection = () => {
             Designed & Developed by {profile.name}
           </span>
           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        </div>
+        <div className="mt-2 flex items-center justify-center gap-3 px-6 md:px-12 pb-8">
+          <span
+            className="text-[9px] tracking-[0.3em] uppercase text-muted-foreground/30"
+            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+          >
+            Pik's 3D model by AUTHOR (Sketchfab, LICENSE)
+          </span>
         </div>
       </motion.div>
     </section>
